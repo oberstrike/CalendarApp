@@ -33,9 +33,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-           val newIntent: Intent = Intent()
+           val newIntent = Intent(this, DayActivity::class.java)
+            newIntent.putExtra("Date",  arrayOf(year, month, dayOfMonth))
+            startActivity(newIntent)
         }
-        logger.info("Create")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

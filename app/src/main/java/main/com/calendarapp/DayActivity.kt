@@ -13,10 +13,15 @@ class DayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_day)
         setSupportActionBar(toolbar)
 
+        val intArray: IntArray =  intent.getIntArrayExtra("Date")
+
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+
+
     }
 
 }
