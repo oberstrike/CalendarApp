@@ -4,6 +4,7 @@ import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import main.com.calendarapp.util.rx.SchedulerProvider
 
 abstract class AbstractViewModel : ViewModel(){
     private val disposables = CompositeDisposable()

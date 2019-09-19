@@ -1,24 +1,17 @@
 package main.com.calendarapp.views.main
 
-import android.view.View
-import androidx.lifecycle.ViewModel
-import com.google.android.material.snackbar.Snackbar
-import main.com.calendarapp.data.AppointmentRepository
-import main.com.calendarapp.models.Appointment
+import io.reactivex.subjects.BehaviorSubject
+import main.com.calendarapp.data.ExerciseRepository
+import main.com.calendarapp.models.Activeness
+import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
 
-class MainViewModel(val repository: AppointmentRepository) : AbstractViewModel(){
+class MainViewModel(private val repository: ExerciseRepository, val provider: SchedulerProvider) : AbstractViewModel(){
 
-    fun onLoad(view: View):Unit {
-        Snackbar.make(view, "Hello from the ViewModel", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
+    val activities: BehaviorSubject<List<Activeness>> = BehaviorSubject.create()
+
+    fun onLoad():Unit {
+        activities.onNext(repository.getContent().toList())
     }
 
-    fun getAppointments():Collection<Appointment>{
-        return repository.getContent()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

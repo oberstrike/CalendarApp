@@ -4,23 +4,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import io.reactivex.functions.Consumer
 
 import kotlinx.android.synthetic.main.activity_main.*
 import main.com.calendarapp.R
-import main.com.calendarapp.models.Appointment
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity() {
 
-    private val logger: Logger = Logger.getLogger("MainLogger")
-
     val myViewModel: MainViewModel by viewModel()
-
-    override fun onDestroy() {
-        super.onDestroy()
-        logger.info("Destroy")
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        //TODO Implementation of Settings and Statistics
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_statistics -> true
             else -> super.onOptionsItemSelected(item)
         }
     }

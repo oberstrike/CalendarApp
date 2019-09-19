@@ -1,7 +1,7 @@
 package main.com.calendarapp.di
 
-import main.com.calendarapp.data.AppointmentRepository
-import main.com.calendarapp.data.AppointmentRepositoryImpl
+import main.com.calendarapp.data.ExerciseRepository
+import main.com.calendarapp.data.ExerciseRepositoryImpl
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.util.rx.SchedulerProviderImpl
 import main.com.calendarapp.views.activeness.ActivenessViewModel
@@ -13,16 +13,17 @@ import org.koin.dsl.module
 
 val calender_module = module {
 
-    single { AppointmentRepositoryImpl() } bind AppointmentRepository::class
+    single { ExerciseRepositoryImpl() } bind ExerciseRepository::class
 
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
 
-    viewModel { ActivenessViewModel() }
+    viewModel { ActivenessViewModel(get()) }
+
+    single { SchedulerProviderImpl() } bind SchedulerProvider::class
 }
 
 val rxModule = module {
 
-    single { SchedulerProviderImpl() } bind SchedulerProvider::class
 }
 
 var appModules = listOf(calender_module, rxModule)

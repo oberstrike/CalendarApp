@@ -22,16 +22,10 @@ class ActivenessActivity : AppCompatActivity() {
 
         val intArray: IntArray = this.intent.getIntArrayExtra("Date")
 
-        val text = "${if (intArray[2] < 10) "0" + intArray[2] else intArray[2]}" +
-                ".${if (intArray[1] < 10) "0" + intArray[1] else intArray[1]}" +
-                ".${if (intArray[0] < 10) "0" + intArray[0] else intArray[0]}"
-
-        dateView.text = text
 
         myViewModel.subject
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(Consumer { t -> dateView.text = t })
-
 
         button.setOnClickListener(View.OnClickListener {
             myViewModel.setName(editText.text.toString())
