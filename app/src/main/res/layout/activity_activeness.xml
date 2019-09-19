@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.day.DayActivity">
+    tools:context=".views.activeness.ActivenessActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -26,7 +26,7 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/content_day" />
+        layout="@layout/content_activeness" />
 
   <EditText
         android:id="@+id/editText"
@@ -39,7 +39,9 @@
         android:text=""
         app:layout_constraintEnd_toStartOf="@+id/include2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="@string/title_activity_day"
+        android:labelFor="@id/button"/>
 
     <Button
         android:id="@+id/button"
@@ -47,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="500dp"
-        android:text="Button"
+        android:text="@string/button_ame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/include2"
         app:layout_constraintTop_toBottomOf="@+id/editText" />

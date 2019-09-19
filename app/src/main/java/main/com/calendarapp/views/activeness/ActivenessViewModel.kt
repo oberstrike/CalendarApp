@@ -1,12 +1,9 @@
-package main.com.calendarapp.views.day
+package main.com.calendarapp.views.activeness
 
-import android.view.View
-import androidx.lifecycle.ViewModel
-import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import main.com.calendarapp.views.AbstractViewModel
 
-class DayViewModel: AbstractViewModel(){
+class ActivenessViewModel: AbstractViewModel(){
 
     val subject: BehaviorSubject<String> = BehaviorSubject.create()
 

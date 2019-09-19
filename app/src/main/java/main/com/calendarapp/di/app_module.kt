@@ -4,7 +4,7 @@ import main.com.calendarapp.data.AppointmentRepository
 import main.com.calendarapp.data.AppointmentRepositoryImpl
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.util.rx.SchedulerProviderImpl
-import main.com.calendarapp.views.day.DayViewModel
+import main.com.calendarapp.views.activeness.ActivenessViewModel
 import main.com.calendarapp.views.main.MainViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -17,7 +17,7 @@ val calender_module = module {
 
     viewModel { MainViewModel(get()) }
 
-    viewModel { DayViewModel() }
+    viewModel { ActivenessViewModel() }
 }
 
 val rxModule = module {

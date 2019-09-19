@@ -8,11 +8,7 @@
     tools:context=".views.main.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="30dp" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.day.DayActivity"
+            android:name=".views.activeness.ActivenessActivity"
             android:label="@string/title_activity_day"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

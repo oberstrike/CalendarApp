@@ -1,25 +1,17 @@
 package main.com.calendarapp.views.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import main.com.calendarapp.R
 import main.com.calendarapp.models.Appointment
-import main.com.calendarapp.views.day.DayActivity
-import main.com.calendarapp.views.main.fragments.AppointmentFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.logging.Logger
 
-class MainActivity : AppCompatActivity(), AppointmentFragment.OnListFragmentInteractionListener {
-
-    override fun onListFragmentInteraction(item: Appointment?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class MainActivity : AppCompatActivity() {
 
     private val logger: Logger = Logger.getLogger("MainLogger")
 
@@ -34,14 +26,6 @@ class MainActivity : AppCompatActivity(), AppointmentFragment.OnListFragmentInte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        logger.info(myViewModel.toString())
-
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-           val newIntent = Intent(this, DayActivity::class.java)
-            newIntent.putExtra("Date",  intArrayOf(year, month, dayOfMonth))
-            startActivity(newIntent)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,26 +1,23 @@
-package main.com.calendarapp.views.day
+package main.com.calendarapp.views.activeness
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 
-import kotlinx.android.synthetic.main.activity_day.*
-import kotlinx.android.synthetic.main.activity_day.view.*
-import kotlinx.android.synthetic.main.content_day.*
+import kotlinx.android.synthetic.main.activity_activeness.*
+import kotlinx.android.synthetic.main.content_activeness.*
 import main.com.calendarapp.R
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DayActivity : AppCompatActivity() {
+class ActivenessActivity : AppCompatActivity() {
 
-    val myViewModel : DayViewModel by viewModel<DayViewModel>()
+    val myViewModel : ActivenessViewModel by viewModel<ActivenessViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_day)
+        setContentView(R.layout.activity_activeness)
         setSupportActionBar(toolbar)
 
         val intArray: IntArray = this.intent.getIntArrayExtra("Date")

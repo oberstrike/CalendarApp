@@ -31,16 +31,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
-        android:id="@+id/appointment_fragment"
-        android:name="main.com.calendarapp.views.main.fragments.AppointmentFragment"
-        android:layout_width="430dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></fragment>
 
     <include
         android:id="@+id/include"
