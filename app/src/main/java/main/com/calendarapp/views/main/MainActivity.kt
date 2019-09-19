@@ -1,21 +1,29 @@
-package main.com.calendarapp
+package main.com.calendarapp.views.main
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.CalendarView
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import main.com.calendarapp.R
+import main.com.calendarapp.models.Appointment
+import main.com.calendarapp.views.day.DayActivity
+import main.com.calendarapp.views.main.fragments.AppointmentFragment
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.logging.Logger
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AppointmentFragment.OnListFragmentInteractionListener {
+
+    override fun onListFragmentInteraction(item: Appointment?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private val logger: Logger = Logger.getLogger("MainLogger")
+
+    val myViewModel: MainViewModel by viewModel()
 
     override fun onDestroy() {
         super.onDestroy()
@@ -27,10 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        logger.info(myViewModel.toString())
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
            val newIntent = Intent(this, DayActivity::class.java)
