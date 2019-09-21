@@ -2,7 +2,6 @@ package main.com.calendarapp
 
 import android.app.Application
 import main.com.calendarapp.di.appModules
-import main.com.calendarapp.di.calender_module
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -11,7 +10,6 @@ import org.koin.core.context.startKoin
 class MainApplication : Application(){
 
     override fun onCreate() {
-
         super.onCreate()
         startKoin {
             // Koin Android logger
@@ -21,6 +19,7 @@ class MainApplication : Application(){
             // use modules
             modules(appModules)
         }
+
 
     }
 

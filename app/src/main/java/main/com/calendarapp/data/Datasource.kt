@@ -2,6 +2,6 @@ package main.com.calendarapp.data
 
 import main.com.calendarapp.models.Activeness
 
-interface ExerciseRepository {
-     fun getContent(): Collection<Activeness>
+interface Datasource {
+    fun getAllActiveness() : ArrayList<Activeness>
 }

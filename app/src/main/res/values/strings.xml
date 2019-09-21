@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Fitnesstracker</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_statistics">Statistics</string>
-    <string name="title_activity_day">Activity</string>
-    <string name="button_ame">Ok</string>
+    <string name="action_settings">Einstellung</string>
+    <string name="action_statistics">Statistik</string>
+    <string name="title_activity_day">Aktivität</string>
+    <string name="ok_button_name">Ok</string>
+    <string name="leer">Platzhalter</string>
+    <string name="delete">Löschen</string>
 </resources>
