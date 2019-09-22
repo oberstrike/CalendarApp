@@ -1,9 +1,15 @@
 package main.com.calendarapp.data
 
+import io.reactivex.Observable
 import main.com.calendarapp.models.Activeness
 
 interface ActivenessRepo {
-     fun getAllActivinesses(): Collection<Activeness>
+     fun getAllActivenesses(): Observable<Collection<Activeness>>
 
-     fun getActivinessById(id: Long) :Activeness
+     fun getActivenessById(id: Long): Observable<Activeness>
+
+     fun saveActiveness(activeness: Activeness)
+
+     fun deleteAll()
+
 }

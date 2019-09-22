@@ -1,33 +1,29 @@
 package main.com.calendarapp.views.main
 
 
+import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import main.com.calendarapp.data.ActivenessRepo
 import main.com.calendarapp.data.local.FileManager
+import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
+import org.joda.time.DateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
-class MainViewModel(private val repository: ActivenessRepo,
+class MainViewModel(val repository: ActivenessRepo,
                     val provider: SchedulerProvider,
                     val fileManager: FileManager
                    ) : AbstractViewModel(){
 
-    val fileName = "main.json"
-    val activities: BehaviorSubject<List<String>> = BehaviorSubject.create()
+    val activities: Observable<Collection<Activeness>> = repository.getAllActivenesses()
 
     fun addActiveness(){
-        val value = activities.value
-        var arrayList: ArrayList<String> = ArrayList()
+       repository.saveActiveness(Activeness(10L, null, DateTime.now() ))
+    }
 
-        if(value != null){
-            arrayList = ArrayList(value)
-            arrayList.add("Training " +  (arrayList.size + 1))
-            activities.onNext(arrayList)
-        }
-        else{
-            arrayList.add("Training " + 1)
-            activities.onNext(arrayList)
-        }
+    fun init(){
 
     }
 }

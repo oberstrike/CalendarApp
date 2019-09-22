@@ -1,13 +1,27 @@
 package main.com.calendarapp.data
 
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import main.com.calendarapp.models.Activeness
 class ActivenessRepoImpl(private val datasource: Datasource) : ActivenessRepo {
 
-    override fun getAllActivinesses(): Collection<Activeness> {
-        return datasource.getAllActiveness()
+    val subject: BehaviorSubject<Collection<Activeness>> = BehaviorSubject.create()
+
+    override fun getAllActivenesses(): Observable<Collection<Activeness>>  {
+        subject.onNext(datasource.getAllActiveness())
+        return subject
     }
 
-    override fun getActivinessById(id: Long) :Activeness {
-        return datasource.getAllActiveness().filterNot{each -> each.id == id}.first()
+    override fun getActivenessById(id: Long) : Observable<Activeness> {
+        return Observable.just( datasource.getAllActiveness().filterNot{ each -> each.id == id}.first() )
+    }
+
+    override fun saveActiveness(activeness: Activeness) {
+        datasource.addActiveness(activeness)
+        subject.onNext(datasource.getAllActiveness())
+    }
+
+    override fun deleteAll() {
+        datasource.deleteAll()
     }
 }

@@ -65,9 +65,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        val name: String? = myViewModel.activities.value?.get(position)
         val intent = Intent(this, ActivenessActivity::class.java)
-        intent.putExtra("Data", name)
+        intent.putExtra("Data", "Training $position")
         startActivity(intent)
     }
 }

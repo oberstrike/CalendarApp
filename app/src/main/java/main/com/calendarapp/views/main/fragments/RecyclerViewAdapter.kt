@@ -8,9 +8,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
+import main.com.calendarapp.models.Activeness
 
 
-class RecyclerViewAdapter(val context: Context, val imagesNames: ArrayList<String>, val onClickListener: OnClickListener) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(val context: Context,val activenesses : ArrayList<Activeness>, private val onClickListener: OnClickListener) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     val TAG: String ="RecyclerViewAdapter"
 
@@ -29,18 +30,23 @@ class RecyclerViewAdapter(val context: Context, val imagesNames: ArrayList<Strin
 
     }
 
-    fun  getItem(position: Int): String {
-        return imagesNames[position]
+    fun  getItem(position: Int): Activeness {
+        return activenesses[position]
     }
 
     override fun getItemCount(): Int {
-        return imagesNames.size
+        return activenesses.size
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.image.setImageResource(R.mipmap.ic_launcher)
-        holder.imageName.text = imagesNames[position]
+        val activeness = activenesses[position]
+        val date = activeness.date
+        val str = date.toString()
+
+        holder.imageName.text = str
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
