@@ -1,5 +1,6 @@
 package main.com.calendarapp.views.activeness
 
+import io.objectbox.query.Query
 import main.com.calendarapp.data.ActivenessRepo
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Exercise
@@ -11,26 +12,24 @@ class ActivenessViewModel(
     private val repository: ActivenessRepo
 ) : AbstractViewModel() {
 
-    var activeness: Activeness? = null
+    lateinit var activeness: Query<Activeness>
 
     fun init(id: Long) {
-        activeness = repository.getActivenessById(id).findFirst()
+        activeness = repository.getActivenessById(id)
         if (activeness == null)
             return
     }
 
-    fun save() {
-        if (activeness != null) {
-            repository.saveActiveness(activeness!!)
-        } else {
-            throw IllegalAccessError("Fehler in der ActivenessViewModel Klasse")
-        }
-    }
 
     fun addExercise() {
         if (activeness != null) {
-            val exercise = Exercise(0, "Neues Training")
-            activeness?.exercises?.add(exercise)
+            val lExercise = Exercise(0, "Neues Training")
+            val lActiv = activeness.findFirst()
+            if(lActiv != null){
+                lActiv?.exercises.add(lExercise)
+                repository.saveActiveness(lActiv!!)
+            }
+
         }
     }
 

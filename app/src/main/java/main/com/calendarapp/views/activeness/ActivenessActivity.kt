@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.objectbox.android.AndroidScheduler
 import kotlinx.android.synthetic.main.activity_activeness.*
 import kotlinx.android.synthetic.main.content_activeness.*
 import main.com.calendarapp.R
@@ -34,6 +35,13 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         exerciseRecyclerViewAdapter = ExerciseRecyclerViewAdapter(this, this)
         exerciseRecyclerView.adapter = exerciseRecyclerViewAdapter
         exerciseRecyclerView.layoutManager = LinearLayoutManager(this)
+
+       myViewModel.subscription =  myViewModel.activeness.subscribe()
+            .on(AndroidScheduler.mainThread())
+            .observer{next ->
+                exerciseRecyclerViewAdapter.exercises = ArrayList( next.first().exercises)
+                exerciseRecyclerViewAdapter.notifyDataSetChanged()
+            }
 
 
     }
