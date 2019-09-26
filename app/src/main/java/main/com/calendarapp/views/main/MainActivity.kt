@@ -1,11 +1,13 @@
 package main.com.calendarapp.views.main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.objectbox.android.AndroidScheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,14 +21,17 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnClickListener {
 
     private val myViewModel: MainViewModel by viewModel()
 
+    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        initRecyclerView()
+        init()
         initAddBtn()
-        registerForContextMenu(recyclerView)
+
     }
 
 
@@ -44,29 +49,41 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnClickListener {
         }
     }
 
+    //Initialisiert das RecylcerView und verbindet dieses mit dem ViewModel
+    private fun init(){
 
-    private fun initRecyclerView(){
 
-        myViewModel.launch {  myViewModel.activities
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribe{next ->
-                recyclerView.adapter = RecyclerViewAdapter(this, ArrayList(next), this)
-            }
-        }
-        recyclerView.adapter = RecyclerViewAdapter(this, ArrayList(), this)
+        recyclerViewAdapter = RecyclerViewAdapter(this,this)
+        recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        myViewModel.subscription = myViewModel.activities
+            .subscribe()
+            .on(AndroidScheduler.mainThread())
+            .observer{ entities ->
+                recyclerViewAdapter.activenesses =  ArrayList(entities)
+                recyclerViewAdapter.notifyDataSetChanged()
+            }
     }
 
+    //Fügt den Buttons ihre Funktionalitäten hinzu
     private fun initAddBtn() {
         btn_add.setOnClickListener{
             myViewModel.addActiveness()
         }
+
+        btn_delete.setOnClickListener{
+            myViewModel.deleteActiveness()
+        }
+
     }
 
+    //Öffnet
     override fun onItemClick(position: Int) {
         val intent = Intent(this, ActivenessActivity::class.java)
-        intent.putExtra("Data", "Training $position")
+        val activeness = recyclerViewAdapter.getItem(position)
+
+        intent.putExtra("Id", activeness.id)
         startActivity(intent)
     }
 }

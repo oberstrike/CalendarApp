@@ -1,4 +1,4 @@
-package main.com.calendarapp.views.main.fragments
+package main.com.calendarapp.views.activeness.fragments
 
 import android.content.Context
 import android.util.Log
@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
 import main.com.calendarapp.ext.convertDateTimeToHeadline
 import main.com.calendarapp.models.Activeness
+import main.com.calendarapp.models.Exercise
 import org.joda.time.format.DateTimeFormatter
 
 
-class RecyclerViewAdapter(
+class ExerciseRecyclerViewAdapter(
     val context: Context,
     private val onClickListener: OnClickListener
-) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder>() {
 
-    var activenesses: ArrayList<Activeness> = ArrayList()
+    var exercises = ArrayList<Exercise>()
 
     val TAG: String = "RecyclerViewAdapter"
 
@@ -26,7 +27,6 @@ class RecyclerViewAdapter(
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val image: ImageView = itemView.findViewById(R.id.image_view)
         val imageName: TextView = itemView.findViewById(R.id.text_view)
-
 
         init {
             itemView.setOnClickListener(this)
@@ -38,24 +38,18 @@ class RecyclerViewAdapter(
 
     }
 
-
-    fun getItem(position: Int): Activeness {
-        return activenesses[position]
+    fun getItem(position: Int): Exercise {
+        return exercises[position]
     }
 
     override fun getItemCount(): Int {
-        return activenesses.size
+        return exercises.size
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.image.setImageResource(R.mipmap.ic_launcher)
-        val activeness = activenesses[position]
-        val date = activeness.date
-
-
-        holder.imageName.text = convertDateTimeToHeadline(date)
-
+        holder.imageName.text = exercises[position].name
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
