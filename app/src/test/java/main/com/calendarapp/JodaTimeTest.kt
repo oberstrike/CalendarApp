@@ -13,7 +13,6 @@ class JodaTimeTest {
     @Test
     fun convertDateTimeToHeadlineTest(){
         val formatter = DateTimeFormatterBuilder().appendPattern("dd.MM.yyyy").toFormatter()
-
         assertEquals("Training vom 15.05", convertDateTimeToHeadline(DateTime.parse("15.05.2019", formatter)))
     }
 

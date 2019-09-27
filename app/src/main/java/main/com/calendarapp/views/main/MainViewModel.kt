@@ -2,7 +2,7 @@ package main.com.calendarapp.views.main
 
 
 import io.objectbox.query.Query
-import main.com.calendarapp.data.ActivenessRepo
+import main.com.calendarapp.repositories.ActivenessRepo
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel

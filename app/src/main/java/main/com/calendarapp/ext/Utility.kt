@@ -1,7 +1,12 @@
 package main.com.calendarapp.ext
 
+import android.content.Context
+import android.net.ConnectivityManager
+import androidx.appcompat.app.AppCompatActivity
+import com.fatboyindustrial.gsonjodatime.Converters
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.joda.time.DateTime
-import java.util.*
 
 @SuppressWarnings
 fun convertDateTimeToHeadline (dateTime: DateTime, language: Language = Language.DE) : String{
@@ -15,6 +20,23 @@ fun convertDateTimeToHeadline (dateTime: DateTime, language: Language = Language
     }
 }
 
+fun verifyAvailableNetwork(activity:AppCompatActivity):Boolean{
+    val connectivityManager=activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo=connectivityManager.activeNetworkInfo
+    return  networkInfo!=null && networkInfo.isConnected
+}
+
+object GsonObject {
+
+    var gson: Gson
+        private set
+
+    init {
+        gson = Converters.registerDateTime(GsonBuilder()).create()
+    }
+}
+
 enum class Language {
     DE, EN
 }
+

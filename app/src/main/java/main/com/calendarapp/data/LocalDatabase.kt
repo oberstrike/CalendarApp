@@ -1,17 +1,16 @@
-package main.com.calendarapp.ext
+package main.com.calendarapp.data
+
 
 import android.content.Context
 import android.util.Log
 import io.objectbox.BoxStore
 import io.objectbox.android.AndroidObjectBrowser
 import main.com.calendarapp.BuildConfig
-import main.com.calendarapp.MainApplication
 import main.com.calendarapp.models.MyObjectBox
 
 object ObjectBox {
     lateinit var boxStore: BoxStore
-
-    private set
+        private set
 
     fun init(context: Context){
         boxStore = MyObjectBox.builder().androidContext(context.applicationContext).build()
@@ -21,7 +20,5 @@ object ObjectBox {
             AndroidObjectBrowser(boxStore).start(context.applicationContext)
         }
     }
-
-
-
 }
+

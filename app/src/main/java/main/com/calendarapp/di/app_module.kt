@@ -1,8 +1,7 @@
 package main.com.calendarapp.di
 
-import main.com.calendarapp.data.ActivenessRepo
-import main.com.calendarapp.data.ActivenessRepoImpl
-import main.com.calendarapp.ext.ObjectBox
+import main.com.calendarapp.repositories.ActivenessRepo
+import main.com.calendarapp.repositories.ActivenessRepoImpl
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.util.rx.SchedulerProviderImpl
 import main.com.calendarapp.views.activeness.ActivenessViewModel

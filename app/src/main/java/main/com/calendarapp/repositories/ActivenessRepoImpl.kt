@@ -1,10 +1,9 @@
-package main.com.calendarapp.data
+package main.com.calendarapp.repositories
 
 import android.content.Context
 import io.objectbox.Box
 import io.objectbox.query.Query
-import io.objectbox.rx.RxQuery
-import main.com.calendarapp.ext.ObjectBox
+import main.com.calendarapp.data.ObjectBox
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Activeness_
 import main.com.calendarapp.models.Exercise
@@ -18,7 +17,6 @@ class ActivenessRepoImpl(context: Context) : ActivenessRepo {
         ObjectBox.init(context)
         activenessBox = ObjectBox.boxStore.boxFor(Activeness::class.java)
     }
-
 
     override fun getAllActivenesses(): Query<Activeness>  {
         return activenessBox.query().build()

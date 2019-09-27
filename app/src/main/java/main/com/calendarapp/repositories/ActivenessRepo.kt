@@ -1,7 +1,6 @@
-package main.com.calendarapp.data
+package main.com.calendarapp.repositories
 
 import io.objectbox.query.Query
-import io.reactivex.Observable
 import main.com.calendarapp.models.Activeness
 
 interface ActivenessRepo {

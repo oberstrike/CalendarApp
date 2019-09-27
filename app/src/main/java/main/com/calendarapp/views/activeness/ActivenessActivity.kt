@@ -1,8 +1,10 @@
 package main.com.calendarapp.views.activeness
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
+import android.text.InputType
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.objectbox.android.AndroidScheduler
@@ -47,7 +49,25 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
     }
 
     override fun onItemClick(position: Int) {
-        Log.i("Position", position.toString())
+        val builder = AlertDialog.Builder(this)
+        val editText = EditText(this)
+        editText.inputType = InputType.TYPE_CLASS_TEXT
+        var input: String
+
+        with(builder){
+            setTitle("Workout Set")
+            setView(editText)
+            setPositiveButton("OK") { dialog, _  ->
+                input = editText.text.toString()
+                dialog.cancel()
+            }
+            setNegativeButton("CANCEL") {dialog, _ ->
+                   dialog.cancel()
+            }
+            show()
+        }
+
+
     }
 
     override fun onClick(v: View?) {
