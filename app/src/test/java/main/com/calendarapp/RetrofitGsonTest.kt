@@ -1,25 +1,26 @@
 package main.com.calendarapp
 
+import android.text.TextUtils
 import com.fatboyindustrial.gsonjodatime.Converters
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import io.reactivex.functions.Consumer
 import main.com.calendarapp.boxTests.AbstractObjectBoxTest
 import main.com.calendarapp.data.ActivenessRetrofitService
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.testdata.TestData
+import main.com.calendarapp.util.retrofit.ServiceGenerator
 import okhttp3.internal.wait
 import okhttp3.internal.waitMillis
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertTrue
 import org.junit.Before
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.powermock.api.mockito.PowerMockito
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -28,22 +29,19 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class RetrofitGsonTest : AbstractObjectBoxTest(){
 
-    lateinit var retrofit: Retrofit
-
     lateinit var webServer: MockWebServer
 
     lateinit var gson: Gson
 
+    lateinit var service: ActivenessRetrofitService
+
     @Before
     fun init(){
+        PowerMockito.mockStatic(TextUtils::class.java)
+
         gson = Converters.registerDateTime(GsonBuilder()).create()
         webServer = MockWebServer()
-        retrofit = Retrofit
-            .Builder()
-            .baseUrl(webServer.url("/activeness/all/").toString())
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+        service = ServiceGenerator.createService(ActivenessRetrofitService::class.java)
     }
 
     @After
@@ -60,7 +58,6 @@ class RetrofitGsonTest : AbstractObjectBoxTest(){
 
         webServer.enqueue(MockResponse().setBody(json))
 
-        val service = retrofit.create(ActivenessRetrofitService::class.java)
         val call = service.getAll()
         assertTrue(call != null)
 
@@ -70,16 +67,12 @@ class RetrofitGsonTest : AbstractObjectBoxTest(){
     @Test
     fun test_retrofit_combined_with_objectBox() {
         val box = store?.boxFor(Activeness::class.java)
-        val data = TestData.TEST_1.activeness()
-        val json = gson.toJson(data)
 
-        webServer.enqueue(MockResponse().setBody(json))
-
-        val service = retrofit.create(ActivenessRetrofitService::class.java)
         val call = service.getAll()
 
-        call.subscribe{it.forEach{ each -> box?.put(each) }}
+        call.doOnError{ println(it.message) }
 
+        call.subscribe{ println(it)}
         assertTrue(  !box?.isEmpty!! )
     }
 

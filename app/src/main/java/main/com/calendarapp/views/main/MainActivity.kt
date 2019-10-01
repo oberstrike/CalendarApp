@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnClickListener {
 
         init()
         initAddBtn()
-
     }
 
 

@@ -11,7 +11,7 @@ enum class TestData {
         override fun activeness(): List<Activeness>{
             val activeness = Activeness(0, DateTime.now())
             val exercise = Exercise(0,"Test")
-            exercise.workoutSets.add(WorkoutSet(5, 10))
+            exercise.workoutSets.add(WorkoutSet(5, 10, "Name"))
             activeness.exercises = listOf(exercise).toMutableList()
             return listOf(activeness)
         }

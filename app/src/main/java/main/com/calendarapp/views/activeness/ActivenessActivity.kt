@@ -1,6 +1,8 @@
 package main.com.calendarapp.views.activeness
 
 import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_activeness.*
 import kotlinx.android.synthetic.main.content_activeness.*
 import main.com.calendarapp.R
 import main.com.calendarapp.views.activeness.fragments.ExerciseRecyclerViewAdapter
+import main.com.calendarapp.views.exercise.ExerciseActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -50,16 +53,17 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
 
     override fun onItemClick(position: Int) {
         val builder = AlertDialog.Builder(this)
-        val editText = EditText(this)
-        editText.inputType = InputType.TYPE_CLASS_TEXT
+        val setText = EditText(this)
+        setText.hint = "Sets"
+        setText.inputType = InputType.TYPE_CLASS_TEXT
         var input: String
+
 
         with(builder){
             setTitle("Workout Set")
-            setView(editText)
+            setView(setText)
             setPositiveButton("OK") { dialog, _  ->
-                input = editText.text.toString()
-                dialog.cancel()
+                onPositiveButtonClick(dialog, setText.text.toString())
             }
             setNegativeButton("CANCEL") {dialog, _ ->
                    dialog.cancel()
@@ -67,11 +71,21 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
             show()
         }
 
-
     }
 
     override fun onClick(v: View?) {
         myViewModel.addExercise()
+    }
+
+    fun onPositiveButtonClick(dialog: DialogInterface, text: String ){
+
+        val intent = Intent(this, ExerciseActivity::class.java)
+
+        intent.putExtra("data", text)
+
+        startActivity(intent)
+
+        dialog.cancel()
     }
 
 
