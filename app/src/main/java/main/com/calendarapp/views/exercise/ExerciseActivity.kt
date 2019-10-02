@@ -1,34 +1,24 @@
 package main.com.calendarapp.views.exercise
 
+import android.app.Activity
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
-import kotlinx.android.synthetic.main.activity_exercise.*
-import kotlinx.android.synthetic.main.content_exercise.*
 import main.com.calendarapp.R
-import main.com.calendarapp.models.WorkoutSet
-import main.com.calendarapp.views.exercise.fragments.WorkoutSetRecyclerViewAdapter
+import main.com.calendarapp.views.exercise.fragments.CustomAdapter
 
-class ExerciseActivity : AppCompatActivity(), WorkoutSetRecyclerViewAdapter.OnClickListener{
-
-    lateinit var workoutSetRecyclerViewAdapter : WorkoutSetRecyclerViewAdapter
+class ExerciseActivity :  AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
         setSupportActionBar(toolbar)
-        initRecyclerView()
-    }
 
-    override fun onItemClick(position: Int) {
+        val id = intent.getIntExtra("data", 0)
 
     }
 
-    fun initRecyclerView() {
-        workoutSetRecyclerViewAdapter = WorkoutSetRecyclerViewAdapter(this,this)
-        workoutSetRecyclerViewAdapter.workouts = ArrayList( listOf(WorkoutSet(5,5,"Mein Name")))
-        workoutRecyclerView.adapter = workoutSetRecyclerViewAdapter
-    }
 
 }

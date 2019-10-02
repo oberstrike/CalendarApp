@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.objectbox.android.AndroidScheduler
@@ -41,10 +42,10 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         exerciseRecyclerView.adapter = exerciseRecyclerViewAdapter
         exerciseRecyclerView.layoutManager = LinearLayoutManager(this)
 
-       myViewModel.subscription =  myViewModel.activeness.subscribe()
+        myViewModel.subscription = myViewModel.activeness.subscribe()
             .on(AndroidScheduler.mainThread())
-            .observer{next ->
-                exerciseRecyclerViewAdapter.exercises = ArrayList( next.first().exercises)
+            .observer { next ->
+                exerciseRecyclerViewAdapter.exercises = ArrayList(next.first().exercises)
                 exerciseRecyclerViewAdapter.notifyDataSetChanged()
             }
 
@@ -52,40 +53,59 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
     }
 
     override fun onItemClick(position: Int) {
-        val builder = AlertDialog.Builder(this)
-        val setText = EditText(this)
-        setText.hint = "Sets"
-        setText.inputType = InputType.TYPE_CLASS_TEXT
-        var input: String
 
-
-        with(builder){
-            setTitle("Workout Set")
-            setView(setText)
-            setPositiveButton("OK") { dialog, _  ->
-                onPositiveButtonClick(dialog, setText.text.toString())
-            }
-            setNegativeButton("CANCEL") {dialog, _ ->
-                   dialog.cancel()
-            }
-            show()
-        }
 
     }
 
     override fun onClick(v: View?) {
-        myViewModel.addExercise()
+        val builder = AlertDialog.Builder(this)
+        val setText = EditText(this)
+        setText.hint = "Sets"
+        setText.inputType = InputType.TYPE_CLASS_NUMBER
+        var input: String
+
+
+        with(builder) {
+            setTitle("Workout Set")
+            setView(setText)
+            setPositiveButton("OK") { dialog, _ ->
+                onPositiveButtonClick(dialog, setText.text.toString())
+
+            }
+            setNegativeButton("CANCEL") { dialog, _ ->
+                dialog.cancel()
+            }
+            show()
+        }
+
+
     }
 
-    fun onPositiveButtonClick(dialog: DialogInterface, text: String ){
+    private fun onPositiveButtonClick(dialog: DialogInterface, text: String) {
 
-        val intent = Intent(this, ExerciseActivity::class.java)
+        val count = text.toIntOrNull()
 
-        intent.putExtra("data", text)
+        val max = 7
 
-        startActivity(intent)
+        if(count == null)
+            Toast.makeText(this, "Falsche Eingabe", Toast.LENGTH_LONG).show()
+        else {
+            if(count < max) {
+                myViewModel.addExercise()
 
-        dialog.cancel()
+                val intent = Intent(this, ExerciseActivity::class.java)
+
+                intent.putExtra("data", count)
+
+                startActivity(intent)
+
+                dialog.cancel()
+            }else {
+                Toast.makeText(this, "Die maximale Anzahl an Sets beträgt $max", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
     }
 
 
