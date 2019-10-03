@@ -21,16 +21,17 @@ class ActivenessViewModel(
     }
 
 
-    fun addExercise() {
+    fun addExercise(): Int {
         if (activeness != null) {
             val lExercise = Exercise(0, "Neues Training")
             val lActiv = activeness.findFirst()
             if(lActiv != null){
-                lActiv?.exercises.add(lExercise)
-                repository.saveActiveness(lActiv!!)
+                lActiv.exercises.add(lExercise)
+                repository.saveActiveness(lActiv)
+                return lActiv.exercises.size
             }
-
         }
+        return 1
     }
 
 
