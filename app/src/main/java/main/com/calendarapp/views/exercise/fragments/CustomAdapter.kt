@@ -27,7 +27,6 @@ class CustomAdapter(context: Context, @LayoutRes private val layoutResource: Int
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val item = getItem(position)
         var result: View
         val viewHolder: ViewHolder
 
@@ -43,7 +42,7 @@ class CustomAdapter(context: Context, @LayoutRes private val layoutResource: Int
         var workoutSet = items[position]
         viewHolder.textView?.text = workoutSet.name
 
-        return result as View
+        return result
     }
 
     override fun getItem(position: Int): WorkoutSet? {

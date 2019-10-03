@@ -1,14 +1,11 @@
 package main.com.calendarapp.views.main
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.objectbox.android.AndroidScheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnClickListener {
         setSupportActionBar(toolbar)
 
         init()
-        initAddBtn()
+        initAddAndDeleteBtn()
     }
 
 
@@ -66,7 +63,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnClickListener {
     }
 
     //Fügt den Buttons ihre Funktionalitäten hinzu
-    private fun initAddBtn() {
+    private fun initAddAndDeleteBtn() {
         btn_add.setOnClickListener{
             myViewModel.addActiveness()
         }

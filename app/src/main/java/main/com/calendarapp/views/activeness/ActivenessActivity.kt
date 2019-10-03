@@ -24,12 +24,13 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
 
     private val myViewModel: ActivenessViewModel by viewModel()
     lateinit var exerciseRecyclerViewAdapter: ExerciseRecyclerViewAdapter
+    var id: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_activeness)
         setSupportActionBar(toolbar)
-        val id: Long = intent.getLongExtra("Id", 0)
+        id = intent.getLongExtra("Id", 0)
         myViewModel.init(id)
         initRecyclerView()
         btn_add.setOnClickListener(this)
@@ -91,11 +92,12 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
             Toast.makeText(this, "Falsche Eingabe", Toast.LENGTH_LONG).show()
         else {
             if(count < max) {
-                myViewModel.addExercise()
+                val position = myViewModel.addExercise()
 
                 val intent = Intent(this, ExerciseActivity::class.java)
-
-                intent.putExtra("data", count)
+                intent.putExtra("ActivenessId", id)
+                intent.putExtra("ExerciseId", position)
+                intent.putExtra("Count", count)
 
                 startActivity(intent)
 
