@@ -1,28 +1,26 @@
 package main.com.calendarapp.views.exercise.fragments
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.LayoutRes
-import androidx.core.view.marginTop
-import androidx.fragment.app.Fragment
 import main.com.calendarapp.R
 import main.com.calendarapp.models.WorkoutSet
-import org.w3c.dom.Text
 
-class CustomAdapter(context: Context, @LayoutRes private val layoutResource: Int, private val items: List<WorkoutSet>):
+class CustomListViewAdapter(
+    context: Context, @LayoutRes private val layoutResource: Int,
+    var items: List<WorkoutSet>
+) :
     ArrayAdapter<WorkoutSet>(context, layoutResource, items), View.OnClickListener {
 
-    private class ViewHolder(row: View?){
-        var textView: TextView?
-
-        init {
-            this.textView = row?.findViewById<TextView>(R.id.textViewSet)
-        }
+    class ViewHolder(row: View?) {
+        var textView: TextView? = row?.findViewById(R.id.textViewSet)
+        var firstAttributeEditText: EditText? = row?.findViewById(R.id.secondAttributeEditText)
+        var secondAttributeEditText: EditText? = row?.findViewById(R.id.firstAttributeEditText)
     }
 
 
@@ -39,8 +37,10 @@ class CustomAdapter(context: Context, @LayoutRes private val layoutResource: Int
             result = convertView
             viewHolder = result.tag as ViewHolder
         }
-        var workoutSet = items[position]
-        viewHolder.textView?.text = workoutSet.name
+
+        viewHolder.textView?.text = "${position + 1}. Satz"
+        viewHolder.firstAttributeEditText?.hint = items[position].repetitions.toString()
+        viewHolder.secondAttributeEditText?.hint = items[position].weight.toString()
 
         return result
     }

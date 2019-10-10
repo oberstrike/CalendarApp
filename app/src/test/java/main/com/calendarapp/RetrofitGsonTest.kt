@@ -20,6 +20,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.powermock.api.mockito.PowerMockito
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.google.gson.reflect.TypeToken
+
+
 
 
 /**
@@ -41,7 +45,7 @@ class RetrofitGsonTest : AbstractObjectBoxTest(){
 
         gson = Converters.registerDateTime(GsonBuilder()).create()
         webServer = MockWebServer()
-        service = ServiceGenerator.createService(ActivenessRetrofitService::class.java)
+        service = ServiceGenerator.createService(ActivenessRetrofitService::class.java, "oberstrike", "mewtu123")
     }
 
     @After
@@ -55,6 +59,8 @@ class RetrofitGsonTest : AbstractObjectBoxTest(){
 
         val data = TestData.TEST_1.activeness()
         val json = gson.toJson(data)
+
+        println(json)
 
         webServer.enqueue(MockResponse().setBody(json))
 
@@ -76,5 +82,36 @@ class RetrofitGsonTest : AbstractObjectBoxTest(){
         assertTrue(  !box?.isEmpty!! )
     }
 
+
+    @Test
+    fun test_convert() {
+        val string = "[\n" +
+                "    {\n" +
+                "        \"id\": 1,\n" +
+                "        \"name\": \"Training\",\n" +
+                "        \"date\": \"2019-10-06T10:28:31.418+02:00\",\n" +
+                "        \"exercises\": [\n" +
+                "            {\n" +
+                "                \"id\": 1,\n" +
+                "                \"name\": \"Übung\",\n" +
+                "                \"workoutSets\": [\n" +
+                "                    {\n" +
+                "                        \"id\": 2,\n" +
+                "                        \"repetitions\": 10,\n" +
+                "                        \"weight\": 10\n" +
+                "                    }\n" +
+                "                ]\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    }\n" +
+                "]"
+        val type = object : TypeToken<List<Activeness>>(){}.type
+
+        val obj = gson.fromJson<List<Activeness>>(string, type)
+
+        println(obj)
+
+
+    }
 
 }

@@ -1,37 +1,68 @@
 package main.com.calendarapp.views.activeness
 
-import io.objectbox.query.Query
-import main.com.calendarapp.repositories.ActivenessRepo
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Exercise
+import main.com.calendarapp.models.WorkoutSet
+import main.com.calendarapp.repositories.ActivenessRepo
+import main.com.calendarapp.repositories.ExerciseRepo
+import main.com.calendarapp.util.ExerciseContext
+import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
 
 class ActivenessViewModel(
     val provider: SchedulerProvider,
-    private val repository: ActivenessRepo
+    private val activenessRepo: ActivenessRepo,
+    private val exerciseRepo: ExerciseRepo
 ) : AbstractViewModel() {
 
-    lateinit var activeness: Query<Activeness>
+    var startJob: Disposable? = null
 
     fun init(id: Long) {
-        activeness = repository.getActivenessById(id)
-        if (activeness == null)
-            return
+        MainContext.activeActivenessObservable = activenessRepo.getActivenessById(id)
     }
 
+    fun addExercise(count: Int): Int {
 
-    fun addExercise(): Int {
-        if (activeness != null) {
-            val lExercise = Exercise(0, "Neues Training")
-            val lActiv = activeness.findFirst()
-            if(lActiv != null){
-                lActiv.exercises.add(lExercise)
-                repository.saveActiveness(lActiv)
-                return lActiv.exercises.size
+        val exercise = Exercise(0, "Übung")
+        exercise.workoutSets = Array(count) {
+            WorkoutSet(
+                0,
+                0,
+                0
+            )
+        }.toMutableList()
+
+        val activeness = MainContext.activeActivenessObservable
+
+        launch {
+            activeness.subscribe {
+                val first = it.first()
+                first.exercises.add(exercise)
+                activenessRepo.saveActiveness(first)
             }
         }
         return 1
+    }
+
+    fun getActiveActiveness(): Observable<List<Activeness>> {
+        return MainContext.activeActivenessObservable
+    }
+
+    fun setActiveExercise(id: Long) {
+        ExerciseContext.activeExerciseObservable = exerciseRepo.getExerciseById(id)
+    }
+
+    fun addNewActiveExercise() {
+        val exercise = Exercise(0, "Übung")
+        exerciseRepo.saveExercise(exercise)
+        ExerciseContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
+    }
+
+    fun onPause() {
+        startJob?.dispose()
     }
 
 

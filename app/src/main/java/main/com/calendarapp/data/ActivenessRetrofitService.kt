@@ -9,6 +9,6 @@ import retrofit2.http.Headers
 interface ActivenessRetrofitService {
 
     @GET("/api/activeness")
-    fun getAll(): Observable<String>
+    fun getAll(): Observable<List<Activeness>>
 
 }

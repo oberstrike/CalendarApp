@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:id="@+id/context_menu">
+        <item
+            android:id="@+id/action_strength"
+            android:title="@string/action_strength" />
+        <item
+            android:id="@+id/action_swim"
+            android:title="@string/action_swim" />
+        <item
+            android:id="@+id/action_endurance"
+            android:title="@string/action_endurance"  />
+    </group>
+</menu>

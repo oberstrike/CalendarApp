@@ -1,30 +1,19 @@
 package main.com.calendarapp.repositories
 
-import android.content.Context
 import io.objectbox.Box
-import io.objectbox.query.Query
+import io.objectbox.rx.RxQuery
 import main.com.calendarapp.data.ObjectBox
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Activeness_
-import main.com.calendarapp.models.Exercise
 
-class ActivenessRepoImpl(context: Context) : ActivenessRepo {
+class ActivenessRepoImpl : ActivenessRepo {
 
 
-    var activenessBox: Box<Activeness>
+    private var activenessBox: Box<Activeness> = ObjectBox.boxStore.boxFor(Activeness::class.java)
 
-    init {
-        ObjectBox.init(context)
-        activenessBox = ObjectBox.boxStore.boxFor(Activeness::class.java)
-    }
+    override fun getAllActivenesses() = RxQuery.observable( activenessBox.query().build())!!
 
-    override fun getAllActivenesses(): Query<Activeness>  {
-        return activenessBox.query().build()
-    }
-
-    override fun getActivenessById(id: Long) : Query<Activeness> {
-        return activenessBox.query().equal(Activeness_.id, id).build()
-    }
+    override fun getActivenessById(id: Long) = RxQuery.observable( activenessBox.query().equal(Activeness_.id, id).build())!!
 
     override fun saveActiveness(activeness: Activeness) {
         activenessBox.put(activeness)
@@ -34,11 +23,9 @@ class ActivenessRepoImpl(context: Context) : ActivenessRepo {
         activenessBox.removeAll()
     }
 
-    fun addExercise(id:Long,exercise: Exercise){
-        val activeness = getActivenessById(id).findFirst()
-        activeness?.exercises?.add(exercise)
-
-        saveActiveness(activeness!!)
+    override fun delete(activeness: Activeness) {
+        activenessBox.remove(activeness)
     }
+
 }
 

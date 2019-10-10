@@ -4,33 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.exercise.ExerciseActivity"
-    tools:showIn="@layout/activity_exercise"
-    android:background="@color/colorDarkSecondaryLight">
+    tools:showIn="@layout/activity_exercise">
+
 
     <TextView
-        android:id="@+id/firstAttributeTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="100dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="15dp"
-        android:background="@color/colorDarkSecondaryLight"
         android:text="@string/repetitions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/secondAttributeTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="225dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="15dp"
-        android:background="@color/colorDarkSecondaryLight"
         android:text="@string/weight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.125"
@@ -46,7 +41,6 @@
         android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/colorDarkSecondaryLight"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

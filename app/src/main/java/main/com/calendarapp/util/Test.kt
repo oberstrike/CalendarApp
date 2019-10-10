@@ -1,7 +1,5 @@
 package main.com.calendarapp.util
 
-object TextUtils {
-    fun isEmpty(str: CharSequence?): Boolean {
-        return str == null || str.length == 0
-    }
-}
+import kotlin.math.abs
+
+fun getReversedIndex(oldIndex: Int, size: Int) = abs(oldIndex - size)

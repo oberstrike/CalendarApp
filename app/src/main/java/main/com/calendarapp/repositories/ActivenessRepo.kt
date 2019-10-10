@@ -1,15 +1,18 @@
 package main.com.calendarapp.repositories
 
 import io.objectbox.query.Query
+import io.reactivex.Observable
 import main.com.calendarapp.models.Activeness
 
 interface ActivenessRepo {
-     fun getAllActivenesses(): Query<Activeness>
+     fun getAllActivenesses(): Observable<List<Activeness>>
 
-     fun getActivenessById(id: Long): Query<Activeness>
+     fun getActivenessById(id: Long):  Observable<List<Activeness>>
 
      fun saveActiveness(activeness: Activeness)
 
      fun deleteAll()
+
+     fun delete(activeness: Activeness)
 
 }

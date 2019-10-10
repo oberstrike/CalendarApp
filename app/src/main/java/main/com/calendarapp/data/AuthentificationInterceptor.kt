@@ -9,6 +9,7 @@ import okhttp3.Response
         val original = chain.request()
         val builder = original.newBuilder().header("Authorization", authToken)
         val request = builder.build()
+
         return chain.proceed(request)
     }
 

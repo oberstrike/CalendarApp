@@ -1,35 +1,58 @@
 package main.com.calendarapp.views.exercise
 
-import io.objectbox.query.Query
-import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Exercise
+import main.com.calendarapp.models.WorkoutSet
 import main.com.calendarapp.repositories.ActivenessRepo
+import main.com.calendarapp.repositories.ExerciseRepo
+import main.com.calendarapp.repositories.WorkoutSetRepo
+import main.com.calendarapp.util.ExerciseContext
+import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
 
-class ExerciseViewModel(val repository: ActivenessRepo,
-                        val schedulerProvider: SchedulerProvider) : AbstractViewModel() {
-    var activeness: Activeness? = null
-    var exercise: Exercise? = null
+class ExerciseViewModel(
+    val exerciseRepo: ExerciseRepo,
+    val workoutSetRepo: WorkoutSetRepo,
+    val activenessRepo: ActivenessRepo,
+    val schedulerProvider: SchedulerProvider) : AbstractViewModel() {
+    var exerciseId: Long = 0
 
-    fun init(activenessId: Int, exerciseId: Int, setCount: Int) {
-        val activeness = repository.getActivenessById(activenessId.toLong()).findFirst()
-
-        if(activeness != null){
-            if(activeness.exercises != null){
-                if(activeness.exercises.size < exerciseId){
-                    val exercise = activeness.exercises[exerciseId.toInt()]
-                    //TODO
-
+    fun init(setCount: Int) {
+        launch {
+            ExerciseContext.activeExerciseObservable.subscribe {
+                val exercise = it.first()
+                exerciseId = exercise.id
+                if (exercise.workoutSets.size == 0) {
+                    for (i in 0 until setCount) {
+                        val workoutSet = WorkoutSet(0, 0, 0)
+                        workoutSetRepo.saveWorkoutSet(workoutSet)
+                        exercise.workoutSets.add(workoutSet)
+                    }
+                    exerciseRepo.saveExercise(exercise)
                 }
             }
-            this.activeness = activeness
+
+        }
+
+    }
+
+    fun saveExercise(exercise: Exercise) {
+        exerciseRepo.saveExercise(exercise)
+
+        launch {
+            MainContext.activeActivenessObservable.subscribe{
+                val first = it.first()
+                if(first.exercises.contains(exercise))
+                    return@subscribe
+
+                first.exercises.add(exercise)
+                activenessRepo.saveActiveness(first)
+            }
         }
     }
 
-    fun saveActiveness(){
-        if(activeness != null)
-            repository.saveActiveness(activeness!!)
-
+    fun saveWorkoutSet(workoutSet: WorkoutSet) {
+        workoutSetRepo.saveWorkoutSet(workoutSet)
     }
+
 }

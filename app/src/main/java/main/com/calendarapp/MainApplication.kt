@@ -1,6 +1,7 @@
 package main.com.calendarapp
 
 import android.app.Application
+import main.com.calendarapp.data.ObjectBox
 import main.com.calendarapp.di.appModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -11,6 +12,9 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        ObjectBox.init(applicationContext)
+
 
 
         startKoin {

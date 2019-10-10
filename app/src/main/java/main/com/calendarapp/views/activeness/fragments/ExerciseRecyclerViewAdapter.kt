@@ -1,17 +1,12 @@
 package main.com.calendarapp.views.activeness.fragments
 
 import android.content.Context
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
-import main.com.calendarapp.ext.convertDateTimeToHeadline
-import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Exercise
-import org.joda.time.format.DateTimeFormatter
 
 
 class ExerciseRecyclerViewAdapter(
@@ -20,8 +15,6 @@ class ExerciseRecyclerViewAdapter(
 ) : RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder>() {
 
     var exercises = ArrayList<Exercise>()
-
-    val TAG: String = "RecyclerViewAdapter"
 
     class ViewHolder(itemView: View, private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {

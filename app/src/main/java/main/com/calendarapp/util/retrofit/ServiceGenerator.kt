@@ -1,7 +1,6 @@
 package main.com.calendarapp.util.retrofit
 
 import main.com.calendarapp.data.AuthentificationInterceptor
-import main.com.calendarapp.util.TextUtils
 import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,7 +24,7 @@ fun createOkHttpClient() : OkHttpClient {
 
 object ServiceGenerator {
 
-    private const val API_BASE_URL = "http://192.168.2.234:8080"
+    private const val API_BASE_URL = "http://192.168.2.112:8080"
 
     private val httpClient = OkHttpClient.Builder()
 
@@ -44,7 +43,7 @@ object ServiceGenerator {
     fun <S> createService(
         serviceClass: Class<S>, username: String?, password: String?
     ): S {
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+        if (username != null && password != null) {
             val authToken = Credentials.basic(username!!, password!!)
             return createService(serviceClass, authToken)
         }
@@ -55,7 +54,7 @@ object ServiceGenerator {
     fun <S> createService(
         serviceClass: Class<S>, authToken: String?
     ): S {
-        if (!TextUtils.isEmpty(authToken)) {
+        if (authToken != null) {
             val interceptor = AuthentificationInterceptor(authToken!!)
 
             if (!httpClient.interceptors().contains(interceptor)) {

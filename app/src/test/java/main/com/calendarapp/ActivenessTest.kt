@@ -1,15 +1,9 @@
 package main.com.calendarapp
 
-import com.fatboyindustrial.gsonjodatime.Converters
-import com.google.gson.GsonBuilder
-import io.objectbox.Box
 import main.com.calendarapp.boxTests.AbstractObjectBoxTest
 import main.com.calendarapp.ext.GsonObject
 import main.com.calendarapp.models.Activeness
-import main.com.calendarapp.models.Exercise
-import main.com.calendarapp.models.WorkoutSet
 import main.com.calendarapp.testdata.TestData
-import org.joda.time.DateTime
 import org.junit.Assert
 import org.junit.Test
 

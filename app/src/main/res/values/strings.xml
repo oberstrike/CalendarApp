@@ -2,12 +2,30 @@
     <string name="app_name">Fitnesstracker</string>
     <string name="action_settings">Einstellung</string>
     <string name="action_statistics">Statistik</string>
+    <string name="action_delete">Entfernen</string>
     <string name="title_activity_day">Aktivität</string>
     <string name="ok_button_name">Ok</string>
     <string name="leer">Platzhalter</string>
-    <string name="delete">Löschen</string>
-
+    <string name="delete">Entfernen</string>
+    <string name="repetitions">Wiederholungen</string>
+    <string name="weight">Gewicht</string>
+    <string name="action_rename">Umbenennen</string>
+    <string name="action_endurance">Ausdauertraining</string>
+    <string name="action_strength">Krafttraining</string>
+    <string name="action_swim">Schwimmtraining</string>
+    <string name="new_activeness_dialog_title">Auswahl der Sportart</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
+    <string name="new_exercise_dialog_title">Anzahl an Sätzen</string>
+    <string-array name="activeness_type_array">
+        <item>Ausdauertraining</item>
+        <item>Krafttraining</item>
+        <item>Schwimmtraining</item>
+    </string-array>
+    <string-array name="exercise_type_strength_array">
+        <item>Übung mit Gewicht</item>
+        <item>Übung ohne Gewicht</item>
+    </string-array>
+
 </resources>
