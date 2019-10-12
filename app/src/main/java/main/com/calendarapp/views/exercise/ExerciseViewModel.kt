@@ -1,6 +1,7 @@
 package main.com.calendarapp.views.exercise
 
-import main.com.calendarapp.models.Exercise
+import android.util.Log
+import main.com.calendarapp.models.ExerciseType
 import main.com.calendarapp.models.WorkoutSet
 import main.com.calendarapp.repositories.ActivenessRepo
 import main.com.calendarapp.repositories.ExerciseRepo
@@ -11,48 +12,58 @@ import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
 
 class ExerciseViewModel(
-    val exerciseRepo: ExerciseRepo,
-    val workoutSetRepo: WorkoutSetRepo,
-    val activenessRepo: ActivenessRepo,
+    private val exerciseRepo: ExerciseRepo,
+    private val workoutSetRepo: WorkoutSetRepo,
+    private val activenessRepo: ActivenessRepo,
     val schedulerProvider: SchedulerProvider) : AbstractViewModel() {
+
     var exerciseId: Long = 0
+    lateinit var type: ExerciseType
 
     fun init(setCount: Int) {
-        launch {
-            ExerciseContext.activeExerciseObservable.subscribe {
-                val exercise = it.first()
-                exerciseId = exercise.id
-                if (exercise.workoutSets.size == 0) {
-                    for (i in 0 until setCount) {
-                        val workoutSet = WorkoutSet(0, 0, 0)
-                        workoutSetRepo.saveWorkoutSet(workoutSet)
-                        exercise.workoutSets.add(workoutSet)
-                    }
-                    exerciseRepo.saveExercise(exercise)
-                }
+        val future = ExerciseContext.activeExerciseObservable.first(ArrayList()).toFuture()
+        val it = future.get()
+
+        val exercise = it.first()
+        type = exercise.type
+        exerciseId = exercise.id
+        if (exercise.workoutSets.size == 0) {
+            for (i in 0 until setCount) {
+                val workoutSet = WorkoutSet(0, 0, 0)
+                workoutSetRepo.saveWorkoutSet(workoutSet)
+                exercise.workoutSets.add(workoutSet)
             }
-
+            exerciseRepo.saveExercise(exercise)
         }
-
+        Log.i("Info", "Anzahl der Workouts ${exercise.workoutSets.size}")
     }
 
-    fun saveExercise(exercise: Exercise) {
-        exerciseRepo.saveExercise(exercise)
+    fun save() {
 
-        launch {
-            MainContext.activeActivenessObservable.subscribe{
-                val first = it.first()
-                if(first.exercises.contains(exercise))
-                    return@subscribe
-
-                first.exercises.add(exercise)
-                activenessRepo.saveActiveness(first)
-            }
-        }
     }
 
     fun saveWorkoutSet(workoutSet: WorkoutSet) {
         workoutSetRepo.saveWorkoutSet(workoutSet)
+
+        val exercise =
+            ExerciseContext.activeExerciseObservable.first(ArrayList()).toFuture().get()
+                .first()
+        val activeness =
+            MainContext.activeActivenessObservable.first(ArrayList()).toFuture().get()
+                .first()
+
+        if (!exercise.workoutSets.contains(workoutSet)) {
+            exercise.workoutSets.add(workoutSet)
+            exerciseRepo.saveExercise(exercise)
+        }
+
+        if (!activeness.exercises.contains(exercise)) {
+            activeness.exercises.add(exercise)
+            activenessRepo.saveActiveness(activeness)
+        }
+
+
+
     }
 
 }

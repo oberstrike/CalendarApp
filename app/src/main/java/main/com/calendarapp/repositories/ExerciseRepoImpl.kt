@@ -25,4 +25,8 @@ class ExerciseRepoImpl : ExerciseRepo {
         exerciseBox.put(exercise)
    }
 
+    override fun deleteExercise(exercise: Exercise) {
+        exerciseBox.remove(exercise)
+    }
+
 }

@@ -1,12 +1,9 @@
 package main.com.calendarapp.views.activeness
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
+import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,7 +44,7 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
                 .observeOn(myViewModel.provider.ui())
                 .subscribe {
                     exerciseRecyclerViewAdapter.exercises = ArrayList(it.first().exercises)
-                exerciseRecyclerViewAdapter.notifyDataSetChanged()
+                    exerciseRecyclerViewAdapter.notifyDataSetChanged()
             }
         }
 
@@ -84,4 +81,32 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         myViewModel.onPause()
     }
 
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        if (item != null) {
+
+            when (item.itemId) {
+                //Wenn "Löschen" ausgewählt ist
+                R.id.action_delete -> {
+                    onActionDeleteExercise()
+                }
+                R.id.action_rename -> {
+                    onActionRenameExercise()
+                }
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
+
+
+    fun onActionDeleteExercise() {
+        val position = exerciseRecyclerViewAdapter.position
+        if (myViewModel.deleteExercise(exerciseRecyclerViewAdapter.getItem(position))) {
+            Toast.makeText(this, "Gelöscht", Toast.LENGTH_LONG)
+        }
+    }
+
+    fun onActionRenameExercise() {
+
+
+    }
 }

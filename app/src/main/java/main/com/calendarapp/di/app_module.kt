@@ -11,10 +11,9 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-
 val calender_module = module {
 
-    single { ActivenessRepoImpl()} bind ActivenessRepo::class
+    single { ActivenessRepoImpl() } bind ActivenessRepo::class
 
     single { ExerciseRepoImpl() } bind ExerciseRepo::class
 

@@ -9,6 +9,9 @@
     <string name="delete">Entfernen</string>
     <string name="repetitions">Wiederholungen</string>
     <string name="weight">Gewicht</string>
+    <string name="time">Zeit</string>
+    <string name="lanes">Bahnen</string>
+    <string name="distance">Distanz</string>
     <string name="action_rename">Umbenennen</string>
     <string name="action_endurance">Ausdauertraining</string>
     <string name="action_strength">Krafttraining</string>
@@ -27,5 +30,4 @@
         <item>Übung mit Gewicht</item>
         <item>Übung ohne Gewicht</item>
     </string-array>
-
 </resources>

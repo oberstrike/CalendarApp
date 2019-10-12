@@ -43,7 +43,6 @@
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:colorAccent">@color/colorDarkSecondary</item>
         <item name="editTextColor">@color/colorDarkSecondary</item>
-        <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
         <item name="android:editTextColor">@color/colorDarkSecondary</item>
         <item name="android:background">@color/colorWhite</item>
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
@@ -54,8 +53,5 @@
         <item name="android:background">@color/colorWhite</item>
     </style>
 
-    <style name="CustomTextViewStyle" parent="Widget.AppCompat.AutoCompleteTextView">
-        <item name="android:textColor">@color/colorDarkSecondary</item>
-    </style>
 
 </resources>

@@ -15,6 +15,6 @@ interface SwimWorkoutSet{
     var lanes: Long
 }
 
-interface SelfWeightWorkoutSet{
+interface TrainWithoutWeightWorkoutSet {
     var repetitions: Long
 }

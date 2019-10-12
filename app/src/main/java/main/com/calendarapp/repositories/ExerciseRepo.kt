@@ -9,4 +9,6 @@ interface ExerciseRepo {
     fun getExerciseById(id:Long):Observable<List<Exercise>>
 
     fun saveExercise(exercise: Exercise)
+
+    fun deleteExercise(exercise: Exercise)
 }

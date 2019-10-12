@@ -75,8 +75,6 @@ class ActivenessRecyclerViewAdapter(
             ActivenessType.SWIMMING -> holder.image.setImageResource(R.drawable.swim)
         }
 
-
-
         holder.itemView.setOnLongClickListener {
             this.position = holder.adapterPosition
             false

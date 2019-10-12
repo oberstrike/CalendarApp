@@ -35,11 +35,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <Spinner
-                android:id="@+id/exercise_type_spinner"
+            <EditText
+                android:id="@+id/setCountEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:spinnerStyle="@android:style/Widget.Spinner.DropDown"/>
+                android:autofillHints="@string/leer"
+                android:hint="3"
+                android:inputType="number" />
+
         </TableRow>
 
     </TableLayout>

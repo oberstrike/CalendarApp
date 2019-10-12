@@ -9,15 +9,13 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import main.com.calendarapp.R
-import main.com.calendarapp.models.WorkoutSet
-import main.com.calendarapp.models.interfaces.SelfWeightWorkoutSet
 import main.com.calendarapp.views.activeness.ActivenessViewModel
 import main.com.calendarapp.views.exercise.ExerciseActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class AddNewExerciseDialog : AppCompatDialogFragment() {
 
-    lateinit var spinner: Spinner
+    lateinit var editText: EditText
 
     private val myViewModel: ActivenessViewModel by sharedViewModel()
 
@@ -32,7 +30,7 @@ class AddNewExerciseDialog : AppCompatDialogFragment() {
 
             builder.setView(view)
             builder.setPositiveButton("Ok") { dialog, _ ->
-                onPositiveButtonClick(dialog, text.toString())
+                onPositiveButtonClick(dialog, editText.text.toString())
                 dialog.cancel()
             }
             editText = view.findViewById(R.id.setCountEditText)
@@ -61,4 +59,6 @@ class AddNewExerciseDialog : AppCompatDialogFragment() {
             }
         }
     }
+
+
 }
