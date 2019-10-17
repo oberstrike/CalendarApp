@@ -9,7 +9,7 @@ import main.com.calendarapp.models.ExerciseType
 import main.com.calendarapp.repositories.ActivenessRepo
 import main.com.calendarapp.repositories.ExerciseRepo
 import main.com.calendarapp.repositories.WorkoutSetRepo
-import main.com.calendarapp.util.ExerciseContext
+import main.com.calendarapp.util.ActivenessContext
 import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
@@ -35,7 +35,7 @@ class ActivenessViewModel(
     }
 
     fun setActiveExercise(id: Long) {
-        ExerciseContext.activeExerciseObservable = exerciseRepo.getExerciseById(id)
+        ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(id)
     }
 
     fun addNewExercise() {
@@ -50,7 +50,7 @@ class ActivenessViewModel(
         }
 
         exerciseRepo.saveExercise(exercise)
-        ExerciseContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
+        ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
     }
 
     fun onPause() {
@@ -81,6 +81,10 @@ class ActivenessViewModel(
     fun renameExercise(exercise: Exercise, name: String) {
         exercise.name = name
         exerciseRepo.saveExercise(exercise)
+        val activeness =
+            MainContext.activeActivenessObservable.first(ArrayList()).toFuture().get().firstOrNull()
+        if (activeness != null)
+            activenessRepo.saveActiveness(activeness)
     }
 
 

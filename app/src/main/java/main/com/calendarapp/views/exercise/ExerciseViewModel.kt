@@ -6,7 +6,7 @@ import main.com.calendarapp.models.WorkoutSet
 import main.com.calendarapp.repositories.ActivenessRepo
 import main.com.calendarapp.repositories.ExerciseRepo
 import main.com.calendarapp.repositories.WorkoutSetRepo
-import main.com.calendarapp.util.ExerciseContext
+import main.com.calendarapp.util.ActivenessContext
 import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
@@ -22,7 +22,7 @@ class ExerciseViewModel(
 
     fun init(setCount: Int) {
 
-        val future = ExerciseContext.activeExerciseObservable.first(ArrayList()).toFuture()
+        val future = ActivenessContext.activeExerciseObservable.first(ArrayList()).toFuture()
         val it = future.get()
 
         val exercise = it.first()
@@ -47,7 +47,7 @@ class ExerciseViewModel(
         workoutSetRepo.saveWorkoutSet(workoutSet)
 
         val exercise =
-            ExerciseContext.activeExerciseObservable.first(ArrayList()).toFuture().get()
+            ActivenessContext.activeExerciseObservable.first(ArrayList()).toFuture().get()
                 .first()
         val activeness =
             MainContext.activeActivenessObservable.first(ArrayList()).toFuture().get()

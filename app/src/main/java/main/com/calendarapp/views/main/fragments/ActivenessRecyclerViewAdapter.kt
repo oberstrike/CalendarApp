@@ -1,6 +1,7 @@
 package main.com.calendarapp.views.main.fragments
 
 import android.content.Context
+import android.util.Log
 import android.view.*
 import android.widget.Filter
 import android.widget.Filterable
@@ -8,8 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
+import main.com.calendarapp.ext.Weekday
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.ActivenessType
+import main.com.calendarapp.util.FilterType
+import main.com.calendarapp.util.MainContext
+import org.joda.time.format.DateTimeFormat
 
 
 class ActivenessRecyclerViewAdapter(
@@ -108,16 +113,33 @@ class ActivenessRecyclerViewAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filterType = MainContext.settings.filterType
+                Log.i("Info", filterType.toString())
+
                 val filteredList = ArrayList<Activeness>()
                 if (constraint == null || constraint.isEmpty()) {
                     filteredList.addAll(activenessesFull)
                 } else {
                     val pattern = constraint.toString()
-                    for (activeness in activenessesFull) {
-                        if (activeness.name.contains(pattern)) {
-                            filteredList.add(activeness)
-                        }
 
+
+                    for (activeness in activenessesFull) {
+                        if (filterType == FilterType.NAME) {
+                            if (activeness.name.contains(pattern)) {
+                                filteredList.add(activeness)
+                            }
+                        } else if (filterType == FilterType.WEEKDAY) {
+                            if (Weekday.byId(activeness.date.dayOfWeek).toString().contains(pattern.toLowerCase())) {
+                                filteredList.add(activeness)
+                            }
+                        } else {
+                            val formatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+                            val date = activeness.date.toString(formatter)
+                            Log.i("info", date)
+                            if (date.contains(pattern)) {
+                                filteredList.add(activeness)
+                            }
+                        }
                     }
                 }
                 val results = FilterResults()

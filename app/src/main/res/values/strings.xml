@@ -2,7 +2,7 @@
     <string name="app_name">Fitnesstracker</string>
     <string name="action_settings">Einstellung</string>
     <string name="action_statistics">Statistik</string>
-    <string name="action_filter">Filtern</string>
+    <string name="action_filter">Filtern nach..</string>
     <string name="action_delete">Entfernen</string>
     <string name="action_rename">Umbenennen</string>
     <string name="action_endurance">Ausdauertraining</string>
@@ -23,7 +23,9 @@
     <string name="new_exercise_dialog_title">Anzahl an Sätzen</string>
     <string name="new_name">Name</string>
     <string name="title_rename">Umbenennen</string>
-
+    <string name="date">Datum</string>
+    <string name="weekday">Wochentag</string>
+    <string name="filter_dialog_title">Filtern nach..</string>
     <string-array name="activeness_type_array">
         <item>Ausdauertraining</item>
         <item>Krafttraining</item>

@@ -50,7 +50,7 @@ enum class Weekday(val id: Int) {
     }
 
     override fun toString(): String {
-        return super.toString().take(2)
+        return super.toString().toLowerCase()
     }
 
 

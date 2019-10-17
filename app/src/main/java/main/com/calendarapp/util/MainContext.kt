@@ -10,12 +10,16 @@ object MainContext {
 
     lateinit var activeActivenessObservable: Observable<List<Activeness>>
 
+    var settings: Settings = Settings(FilterType.NAME)
+
 }
 
-object ExerciseContext {
+object ActivenessContext {
 
     lateinit var allExerciseObservable: Observable<List<Exercise>>
 
     lateinit var activeExerciseObservable: Observable<List<Exercise>>
 
 }
+
+

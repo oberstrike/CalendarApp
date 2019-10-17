@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.content_exercise.*
 import main.com.calendarapp.R
 import main.com.calendarapp.models.ExerciseType
 import main.com.calendarapp.models.WorkoutSet
-import main.com.calendarapp.util.ExerciseContext
+import main.com.calendarapp.util.ActivenessContext
 import main.com.calendarapp.views.exercise.fragments.EnduranceTrainingRecyclerViewAdapter
 import main.com.calendarapp.views.exercise.fragments.SwimTrainingRecyclerViewAdapter
 import main.com.calendarapp.views.exercise.fragments.TrainingWithWeightsRecyclerViewAdapter
@@ -54,7 +54,7 @@ class ExerciseActivity : AppCompatActivity(),
 
 
         myViewModel.launch {
-            ExerciseContext.activeExerciseObservable
+            ActivenessContext.activeExerciseObservable
                 .subscribeOn(myViewModel.schedulerProvider.computation())
                 .observeOn(myViewModel.schedulerProvider.ui())
                 .subscribe {

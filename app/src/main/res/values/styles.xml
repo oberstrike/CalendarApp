@@ -46,8 +46,9 @@
         <item name="android:editTextColor">@color/colorDarkSecondary</item>
         <item name="android:background">@color/colorWhite</item>
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
-
+        <item name="android:textViewStyle">@style/ThemeOverlay.MyTheme</item>
     </style>
+
 
     <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/colorDarkSecondary</item>
