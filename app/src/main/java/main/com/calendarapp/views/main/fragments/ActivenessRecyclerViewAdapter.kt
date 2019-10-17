@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
-import main.com.calendarapp.ext.convertDateTimeToHeadline
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.ActivenessType
 
@@ -87,13 +86,8 @@ class ActivenessRecyclerViewAdapter(
             this.position = holder.adapterPosition
             false
         }
-        if(activeness.name == "")
-        {
-            holder.imageName.text = convertDateTimeToHeadline(date)
-        }else
-        {
-            holder.imageName.text = activeness.name
-        }
+        holder.imageName.text = activeness.name
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

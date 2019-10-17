@@ -75,8 +75,6 @@ class ActivenessViewModel(
             MainContext.activeActivenessObservable.first(ArrayList()).toFuture().get().firstOrNull()
         if (activeness != null)
             activenessRepo.saveActiveness(activeness)
-
-
         return true
     }
 

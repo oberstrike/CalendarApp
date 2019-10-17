@@ -2,6 +2,9 @@ package main.com.calendarapp.ext
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.fatboyindustrial.gsonjodatime.Converters
 import com.google.gson.Gson
@@ -40,11 +43,29 @@ enum class Language {
 }
 
 enum class Weekday(val id: Int) {
-    MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6), SUNDAY(7);
+    MONTAG(1), DIENSTAG(2), MITTWOCH(3), DONNERSTAG(4), FREITAG(5), SAMSTAG(6), SONNTAG(7);
 
     companion object {
         fun byId(id: Int) = values().find { it.id == id }
     }
 
+    override fun toString(): String {
+        return super.toString().take(2)
+    }
 
+
+}
+
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+    })
 }

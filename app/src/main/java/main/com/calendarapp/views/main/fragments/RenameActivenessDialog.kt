@@ -29,15 +29,16 @@ class RenameActivenessDialog(val activeness: Activeness) : AppCompatDialogFragme
             with(builder) {
                 setView(view)
                 setPositiveButton("Ok") { dialog, _ ->
-                    val newName = newNameEdit.text.toString()
-                    if (newName.isNotEmpty() && newName.length > 6) {
-                        myViewModel.rename(activeness, newName)
+                    if (newNameEdit.text.isNotEmpty()) {
+                        val newName = newNameEdit.text.toString()
+                        if (newName.length > 6) {
+                            myViewModel.rename(activeness, newName)
+                        }
                     }
+                    dialog.cancel()
                 }
             }
         }
-
-
         return builder.create()
     }
 }

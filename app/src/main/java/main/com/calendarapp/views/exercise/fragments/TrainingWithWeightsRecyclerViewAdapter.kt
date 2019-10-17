@@ -8,15 +8,18 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
+import main.com.calendarapp.ext.afterTextChanged
 import main.com.calendarapp.models.WorkoutSet
-import main.com.calendarapp.util.afterTextChanged
+import main.com.calendarapp.views.exercise.fragments.interfaces.Fillable
+import main.com.calendarapp.views.exercise.fragments.interfaces.OnTextChangeListener
 import okhttp3.internal.toLongOrDefault
 
 
 class TrainingWithWeightsRecyclerViewAdapter(
     val context: Context,
     private val onTextChangeListener: OnTextChangeListener
-) : RecyclerView.Adapter<TrainingWithWeightsRecyclerViewAdapter.ViewHolder>(), Fillable {
+) : RecyclerView.Adapter<TrainingWithWeightsRecyclerViewAdapter.ViewHolder>(),
+    Fillable {
 
     override var items = ArrayList<WorkoutSet>()
 

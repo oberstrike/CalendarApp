@@ -1,4 +1,4 @@
-package main.com.calendarapp.views.exercise.fragments
+package main.com.calendarapp.views.exercise.fragments.interfaces
 
 import main.com.calendarapp.models.WorkoutSet
 

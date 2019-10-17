@@ -10,10 +10,16 @@ import main.com.calendarapp.R
 import main.com.calendarapp.models.ExerciseType
 import main.com.calendarapp.models.WorkoutSet
 import main.com.calendarapp.util.ExerciseContext
-import main.com.calendarapp.views.exercise.fragments.*
+import main.com.calendarapp.views.exercise.fragments.EnduranceTrainingRecyclerViewAdapter
+import main.com.calendarapp.views.exercise.fragments.SwimTrainingRecyclerViewAdapter
+import main.com.calendarapp.views.exercise.fragments.TrainingWithWeightsRecyclerViewAdapter
+import main.com.calendarapp.views.exercise.fragments.TrainingWithoutWeightRecyclerViewAdapter
+import main.com.calendarapp.views.exercise.fragments.interfaces.Fillable
+import main.com.calendarapp.views.exercise.fragments.interfaces.OnTextChangeListener
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ExerciseActivity : AppCompatActivity(), OnTextChangeListener {
+class ExerciseActivity : AppCompatActivity(),
+    OnTextChangeListener {
 
     private val myViewModel: ExerciseViewModel by viewModel()
 

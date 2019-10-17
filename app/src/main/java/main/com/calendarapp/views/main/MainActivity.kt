@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(),
             }
         })
 
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -116,7 +116,6 @@ class MainActivity : AppCompatActivity(),
     //Handelt das Contex-Menü
     override fun onContextItemSelected(item: MenuItem?): Boolean {
         if (item != null) {
-
             when (item.itemId) {
                 //Wenn "Löschen" ausgewählt ist
                 R.id.action_delete -> {
