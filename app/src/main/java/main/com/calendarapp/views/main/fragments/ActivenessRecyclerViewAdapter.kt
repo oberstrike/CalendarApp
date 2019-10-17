@@ -2,6 +2,8 @@ package main.com.calendarapp.views.main.fragments
 
 import android.content.Context
 import android.view.*
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +16,15 @@ import main.com.calendarapp.models.ActivenessType
 class ActivenessRecyclerViewAdapter(
     val context: Context,
     private val onClickListener: OnClickListener
-) : RecyclerView.Adapter<ActivenessRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ActivenessRecyclerViewAdapter.ViewHolder>(), Filterable {
 
-    var activenesses: ArrayList<Activeness> = ArrayList()
+    private var activenesses: ArrayList<Activeness> = ArrayList()
+    private var activenessesFull: ArrayList<Activeness> = ArrayList()
+
+    fun setActivenesses(activenesses: ArrayList<Activeness>) {
+        this.activenesses = activenesses
+        this.activenessesFull = ArrayList(activenesses)
+    }
 
     var position: Int = 0
 
@@ -102,5 +110,34 @@ class ActivenessRecyclerViewAdapter(
         holder.itemView.setOnLongClickListener(null)
         super.onViewRecycled(holder)
     }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList = ArrayList<Activeness>()
+                if (constraint == null || constraint.isEmpty()) {
+                    filteredList.addAll(activenessesFull)
+                } else {
+                    val pattern = constraint.toString()
+                    for (activeness in activenessesFull) {
+                        if (activeness.name.contains(pattern)) {
+                            filteredList.add(activeness)
+                        }
+
+                    }
+                }
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                activenesses.clear()
+                activenesses.addAll(results?.values as Collection<Activeness>)
+                notifyDataSetChanged()
+            }
+        }
+    }
+
 }
 

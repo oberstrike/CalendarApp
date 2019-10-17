@@ -24,8 +24,7 @@ class TrainingWithWeightsRecyclerViewAdapter(
         RecyclerView.ViewHolder(itemView) {
         val repetitions: EditText = itemView.findViewById(R.id.firstAttributeEditText)
         val weight: EditText = itemView.findViewById(R.id.secondAttributeEditText)
-        val repetitionsText: TextView = itemView.findViewById(R.id.firstAttributeTextView)
-        val weightText: TextView = itemView.findViewById(R.id.secondAttributeEditText)
+        val setTextView: TextView = itemView.findViewById(R.id.textViewSet)
 
     }
 
@@ -39,8 +38,9 @@ class TrainingWithWeightsRecyclerViewAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.repetitions.hint = items[position].repetitions.toString()
+        holder.setTextView.text = "${position + 1}."
 
+        holder.repetitions.hint = items[position].repetitions.toString()
         holder.repetitions.afterTextChanged {
             if (it.isNotEmpty()) {
                 items[position].repetitions = it.toLongOrDefault(items[position].repetitions)

@@ -11,7 +11,7 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val calender_module = module {
+val fitnessModule = module {
 
     single { ActivenessRepoImpl() } bind ActivenessRepo::class
 
@@ -19,9 +19,9 @@ val calender_module = module {
 
     single { WorkoutSetRepoImpl() } bind WorkoutSetRepo::class
 
-    viewModel { MainViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get(), get(), get()) }
 
-    viewModel { ActivenessViewModel(get(), get(), get()) }
+    viewModel { ActivenessViewModel(get(), get(), get(), get()) }
 
     viewModel {ExerciseViewModel(get(), get(), get(), get())}
 
@@ -32,4 +32,4 @@ val calender_module = module {
 }
 
 
-var appModules = listOf(calender_module)
+var appModules = listOf(fitnessModule)

@@ -7,7 +7,7 @@ import io.objectbox.converter.PropertyConverter
 
 @Entity
 data class Exercise(@Id var id:Long = 0,
-                    val name: String,
+                    var name: String,
                     @Convert(
                         converter = MyExerciseTypeConverter::class,
                         dbType = Int::class
@@ -40,5 +40,4 @@ enum class ExerciseType(val id: Int) {
     ENDURANCEWORKOUTSET(1),
     SWIMWORKOUTSET(2),
     SELFWEIGHTWORKOUTSET(3)
-
 }

@@ -3,9 +3,6 @@ package main.com.calendarapp.util
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import kotlin.math.abs
-
-fun getReversedIndex(oldIndex: Int, size: Int) = abs(oldIndex - size)
 
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {

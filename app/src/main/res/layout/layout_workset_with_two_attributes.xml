@@ -55,7 +55,6 @@
                 android:background="@color/colorDarkSecondary"
                 android:text="@string/weight"
                 android:textColor="@color/colorWhite"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.125"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +101,7 @@
                 android:autofillHints="2"
                 android:ems="10"
                 android:hint="@string/leer"
-                android:inputType="numberSigned"
+                android:inputType="numberDecimal"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorDarkSecondaryLight"
                 app:layout_constraintStart_toEndOf="@+id/firstAttributeEditText"

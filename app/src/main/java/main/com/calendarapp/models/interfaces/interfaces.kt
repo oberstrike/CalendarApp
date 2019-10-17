@@ -7,11 +7,11 @@ interface StrengthWorkoutSet{
 
 interface EnduranceWorkoutSet{
     var distance: Long
-    var time: Long
+    var time: Float
 }
 
 interface SwimWorkoutSet{
-    var time: Long
+    var time: Float
     var lanes: Long
 }
 

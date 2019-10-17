@@ -5,12 +5,11 @@ import okhttp3.Response
 
     class AuthentificationInterceptor(val authToken:String) : Interceptor {
 
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val original = chain.request()
-        val builder = original.newBuilder().header("Authorization", authToken)
-        val request = builder.build()
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val original = chain.request()
+            val builder = original.newBuilder().header("Authorization", authToken)
+            val request = builder.build()
 
-        return chain.proceed(request)
+            return chain.proceed(request)
+        }
     }
-
-}

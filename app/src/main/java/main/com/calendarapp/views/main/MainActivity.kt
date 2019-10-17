@@ -1,12 +1,13 @@
 package main.com.calendarapp.views.main
 
-import android.app.AlertDialog
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
+import android.view.inputmethod.EditorInfo
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,9 @@ import main.com.calendarapp.R
 import main.com.calendarapp.views.activeness.ActivenessActivity
 import main.com.calendarapp.views.main.fragments.ActivenessRecyclerViewAdapter
 import main.com.calendarapp.views.main.fragments.AddNewActivityDialog
+import main.com.calendarapp.views.main.fragments.RenameActivenessDialog
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class MainActivity : AppCompatActivity(),
     ActivenessRecyclerViewAdapter.OnClickListener {
@@ -36,6 +39,23 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                activenessRecyclerViewAdapter.filter.filter(newText)
+                return false
+            }
+        })
+
         return true
     }
 
@@ -63,7 +83,7 @@ class MainActivity : AppCompatActivity(),
                     println(it)
                 }
                 .subscribe {
-                    activenessRecyclerViewAdapter.activenesses = ArrayList(it.asReversed())
+                    activenessRecyclerViewAdapter.setActivenesses(ArrayList(it.asReversed()))
                     activenessRecyclerViewAdapter.notifyDataSetChanged()
                 }
         }
@@ -114,25 +134,8 @@ class MainActivity : AppCompatActivity(),
         val activeness =
             activenessRecyclerViewAdapter.getItem(activenessRecyclerViewAdapter.position)
 
-        val builder = AlertDialog.Builder(this, R.style.AlertDialogCustom)
-        val newNameEditText = EditText(this)
-        newNameEditText.setTextColor(resources.getColor(R.color.colorWhite, resources.newTheme()))
-        newNameEditText.hint = activeness.name
-        newNameEditText.inputType = InputType.TYPE_CLASS_TEXT
-
-        with(builder) {
-            setTitle(R.string.action_rename)
-            setView(newNameEditText)
-            setPositiveButton("OK") { dialog, _ ->
-                myViewModel.rename(activeness, newNameEditText.text.toString())
-                dialog.cancel()
-
-            }
-            setNegativeButton("CANCEL") { dialog, _ ->
-                dialog.cancel()
-            }
-            show()
-        }
+        val dialogFragment = RenameActivenessDialog(activeness)
+        dialogFragment.show(supportFragmentManager, "Activeness umbenennen")
     }
 
     private fun onActionDeleteActiveness() {

@@ -22,6 +22,8 @@ data class Activeness constructor(@Id(assignable = false) var id: Long = 0,
                                   var type: ActivenessType = ActivenessType.STRENGTH
                                   ){
     lateinit var exercises: MutableList<Exercise>
+
+
 }
 
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import main.com.calendarapp.R
 import main.com.calendarapp.models.WorkoutSet
@@ -21,6 +22,7 @@ class TrainingWithoutWeightRecyclerViewAdapter(
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val repetitions: EditText = itemView.findViewById(R.id.firstAttributeEditText)
+        val setTextView: TextView = itemView.findViewById(R.id.textViewSet)
     }
 
     fun getItem(position: Int): WorkoutSet {
@@ -33,6 +35,7 @@ class TrainingWithoutWeightRecyclerViewAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setTextView.text = "${position + 1}."
         holder.repetitions.hint = items[position].repetitions.toString()
 
         holder.repetitions.afterTextChanged {

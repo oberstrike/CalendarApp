@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_activeness.*
 import kotlinx.android.synthetic.main.content_activeness.*
 import main.com.calendarapp.R
+import main.com.calendarapp.ext.convertDateTimeToHeadline
+import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.views.activeness.fragments.AddNewExerciseDialog
 import main.com.calendarapp.views.activeness.fragments.ExerciseRecyclerViewAdapter
+import main.com.calendarapp.views.activeness.fragments.RenameExerciseDialog
 import main.com.calendarapp.views.exercise.ExerciseActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -27,8 +30,31 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_activeness)
         setSupportActionBar(toolbar)
+
+
         val id = intent.getLongExtra("Id", 0)
         myViewModel.init(id)
+
+
+        myViewModel.launch {
+            MainContext.activeActivenessObservable.subscribeOn(
+                myViewModel.provider.computation()
+            )
+                .observeOn(myViewModel.provider.ui())
+                .subscribe {
+                    val first = it.first()
+                    val name = first.name
+                    val date = first.date
+                    if (name == "") {
+                        supportActionBar?.title = convertDateTimeToHeadline(date)
+                    } else {
+                        supportActionBar?.title = first.name
+                    }
+
+                }
+        }
+
+
         initRecyclerView()
         btn_add.setOnClickListener(this)
     }
@@ -106,7 +132,9 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
     }
 
     fun onActionRenameExercise() {
-
-
+        val position = exerciseRecyclerViewAdapter.position
+        val exercise = exerciseRecyclerViewAdapter.getItem(position)
+        val renameFragment = RenameExerciseDialog(exercise)
+        renameFragment.show(supportFragmentManager, "Rename Fragment")
     }
 }

@@ -1,6 +1,5 @@
 package main.com.calendarapp.repositories
 
-import io.objectbox.query.Query
 import io.reactivex.Observable
 import main.com.calendarapp.models.Activeness
 
@@ -14,5 +13,4 @@ interface ActivenessRepo {
      fun deleteAll()
 
      fun delete(activeness: Activeness)
-
 }

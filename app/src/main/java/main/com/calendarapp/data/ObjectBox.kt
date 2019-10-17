@@ -13,8 +13,9 @@ object ObjectBox {
         private set
 
     fun init(context: Context){
-        boxStore = MyObjectBox.builder().androidContext(context.applicationContext).build()
-
+        boxStore = MyObjectBox
+            .builder()
+            .androidContext(context.applicationContext).build()
         if (BuildConfig.DEBUG) {
             Log.d("Debug", "Using ObjectBox ${BoxStore.getVersion()} (${BoxStore.getVersionNative()})")
             AndroidObjectBrowser(boxStore).start(context.applicationContext)

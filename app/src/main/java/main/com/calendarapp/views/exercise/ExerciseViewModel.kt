@@ -21,6 +21,7 @@ class ExerciseViewModel(
     lateinit var type: ExerciseType
 
     fun init(setCount: Int) {
+
         val future = ExerciseContext.activeExerciseObservable.first(ArrayList()).toFuture()
         val it = future.get()
 
@@ -61,8 +62,6 @@ class ExerciseViewModel(
             activeness.exercises.add(exercise)
             activenessRepo.saveActiveness(activeness)
         }
-
-
 
     }
 

@@ -25,6 +25,7 @@ class SwimTrainingRecyclerViewAdapter(
         val time: EditText = itemView.findViewById(R.id.secondAttributeEditText)
         val lanesText: TextView = itemView.findViewById(R.id.firstAttributeTextView)
         val timeText: TextView = itemView.findViewById(R.id.secondAttributeTextView)
+        val setTextView: TextView = itemView.findViewById(R.id.textViewSet)
     }
 
     fun getItem(position: Int): WorkoutSet {
@@ -37,6 +38,9 @@ class SwimTrainingRecyclerViewAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setTextView.text = "${position + 1}."
+
+
         holder.lanes.hint = items[position].lanes.toString()
 
         holder.lanes.afterTextChanged {
@@ -50,7 +54,11 @@ class SwimTrainingRecyclerViewAdapter(
         holder.time.hint = items[position].time.toString()
         holder.time.afterTextChanged {
             if (it.isNotEmpty()) {
-                items[position].time = it.toLongOrDefault(items[position].time)
+                val newValue = it.toFloatOrNull()
+                if (newValue != null)
+                    items[position].time = newValue
+                else
+                    items[position].time = items[position].time
                 this.onTextChangeListener.onChange(items[position])
             }
         }

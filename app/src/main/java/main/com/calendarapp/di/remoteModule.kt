@@ -4,7 +4,7 @@ import main.com.calendarapp.data.ActivenessRetrofitService
 import main.com.calendarapp.util.retrofit.ServiceGenerator
 import org.koin.dsl.module
 
-val remote_module = module {
+val remoteModule = module {
     single { createWebService() }
 }
 

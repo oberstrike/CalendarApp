@@ -32,7 +32,7 @@ class ExerciseActivity : AppCompatActivity(), OnTextChangeListener {
 
     private fun initListView(){
 
-        val obj = when (myViewModel.type) {
+        val obj: Any = when (myViewModel.type) {
             ExerciseType.ENDURANCEWORKOUTSET -> EnduranceTrainingRecyclerViewAdapter(this, this)
             ExerciseType.STRENGTHWORKOUTSET -> TrainingWithWeightsRecyclerViewAdapter(this, this)
             ExerciseType.SWIMWORKOUTSET -> SwimTrainingRecyclerViewAdapter(this, this)

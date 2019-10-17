@@ -45,7 +45,7 @@ class AddNewExerciseDialog : AppCompatDialogFragment() {
             Toast.makeText(context, "Falsche Eingabe", Toast.LENGTH_LONG).show()
         else {
             if (count < max) {
-                myViewModel.addNewActiveExercise()
+                myViewModel.addNewExercise()
                 val intent = Intent(context, ExerciseActivity::class.java)
                 intent.putExtra("Count", count)
                 startActivity(intent)

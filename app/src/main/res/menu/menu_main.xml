@@ -12,4 +12,11 @@
         android:orderInCategory="100"
         android:title="@string/action_statistics"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/search"
+        android:title="@string/title_rename"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
 </menu>

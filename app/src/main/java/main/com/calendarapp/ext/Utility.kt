@@ -20,6 +20,7 @@ fun convertDateTimeToHeadline (dateTime: DateTime, language: Language = Language
     }
 }
 
+
 fun verifyAvailableNetwork(activity:AppCompatActivity):Boolean{
     val connectivityManager=activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo=connectivityManager.activeNetworkInfo
@@ -27,10 +28,8 @@ fun verifyAvailableNetwork(activity:AppCompatActivity):Boolean{
 }
 
 object GsonObject {
-
     var gson: Gson
         private set
-
     init {
         gson = Converters.registerDateTime(GsonBuilder()).create()
     }
@@ -40,3 +39,12 @@ enum class Language {
     DE, EN
 }
 
+enum class Weekday(val id: Int) {
+    MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6), SUNDAY(7);
+
+    companion object {
+        fun byId(id: Int) = values().find { it.id == id }
+    }
+
+
+}
