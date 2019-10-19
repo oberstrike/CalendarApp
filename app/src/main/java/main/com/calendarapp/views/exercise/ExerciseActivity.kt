@@ -53,7 +53,7 @@ class ExerciseActivity : AppCompatActivity(),
                 .observeOn(myViewModel.schedulerProvider.ui()).subscribe {
                     for (i in it.indices) {
                         val workoutSet = it[i]
-                        val fragment = TrainingWithWeightsRecyclerViewFragment(workoutSet, i + 1, this)
+                        val fragment = TrainingWithWeightsRecyclerViewFragment(workoutSet, i + 1, this, myViewModel.type)
                         fragment.arguments = intent.extras
                         supportFragmentManager.beginTransaction()
                             .add(container_1.id + i, fragment).commit()
