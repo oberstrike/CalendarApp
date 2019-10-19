@@ -25,7 +25,7 @@ class TrainingWithWeightsRecyclerViewFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.item_layout, container, false)
+        val view = inflater.inflate(R.layout.layout_workset_with_two_attributes, container, false)
 
         return view
     }
