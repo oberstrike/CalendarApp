@@ -15,8 +15,6 @@ class MainApplication : Application() {
 
         ObjectBox.init(applicationContext)
 
-
-
         startKoin {
             // Koin Android logger
             androidLogger()

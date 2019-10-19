@@ -15,7 +15,6 @@ data class WorkoutSet(
     override var repetitions: Long,
     override var weight: Long,
     override var distance: Long = 0,
-    @Uid(6193650025989967526L)
     override var time: Float = 0f,
     override var lanes: Long = 0
 ) : StrengthWorkoutSet, EnduranceWorkoutSet, SwimWorkoutSet, TrainWithoutWeightWorkoutSet
