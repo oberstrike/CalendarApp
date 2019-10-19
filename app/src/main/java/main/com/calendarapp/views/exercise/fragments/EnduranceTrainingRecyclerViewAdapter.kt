@@ -20,14 +20,14 @@ class EnduranceTrainingRecyclerViewAdapter(
 ) : RecyclerView.Adapter<EnduranceTrainingRecyclerViewAdapter.ViewHolder>(),
     Fillable {
 
-    override var items = ArrayList<WorkoutSet>()
+    private var items = ArrayList<WorkoutSet>()
 
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val distance: EditText = itemView.findViewById(R.id.firstAttributeEditText)
         val time: EditText = itemView.findViewById(R.id.secondAttributeEditText)
-        val distanceText: TextView = itemView.findViewById(R.id.firstAttributeTextView)
-        val timeText: TextView = itemView.findViewById(R.id.secondAttributeTextView)
+        //  val distanceText: TextView = itemView.findViewById(R.id.firstAttributeTextView)
+        // val timeText: TextView = itemView.findViewById(R.id.secondAttributeTextView)
         val setTextView: TextView = itemView.findViewById(R.id.textViewSet)
     }
 
@@ -38,6 +38,7 @@ class EnduranceTrainingRecyclerViewAdapter(
     override fun getItemCount(): Int {
         return items.size
     }
+
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -52,7 +53,7 @@ class EnduranceTrainingRecyclerViewAdapter(
             }
         }
 
-        holder.distanceText.text = context.resources.getText(R.string.distance)
+        //    holder.distanceText.text = context.resources.getText(R.string.distance)
 
         holder.time.hint = items[position].time.toString()
         holder.time.afterTextChanged {
@@ -66,7 +67,7 @@ class EnduranceTrainingRecyclerViewAdapter(
                 this.onTextChangeListener.onChange(items[position])
             }
         }
-        holder.timeText.text = context.resources.getText(R.string.time)
+        //      holder.timeText.text = context.resources.getText(R.string.time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -74,6 +75,16 @@ class EnduranceTrainingRecyclerViewAdapter(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_workset_with_two_attributes, parent, false)
         return ViewHolder(view)
+    }
+
+    override fun setItems(list: ArrayList<WorkoutSet>) {
+        if (list == null) {
+            return
+        }
+
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
     }
 
 

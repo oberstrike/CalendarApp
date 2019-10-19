@@ -86,7 +86,7 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
                 .observeOn(myViewModel.provider.ui())
                 .subscribe {
                     val first = it.first()
-                    myViewModel.setActiveExercise(first.exercises[position].id)
+                    myViewModel.setActiveExercise(first.exercises[position])
                     val workoutSetCount = first.exercises[position].workoutSets.size
                     val intent = Intent(this, ExerciseActivity::class.java)
                     intent.putExtra("Count", workoutSetCount)

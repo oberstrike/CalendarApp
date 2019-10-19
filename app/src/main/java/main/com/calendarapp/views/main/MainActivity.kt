@@ -77,8 +77,8 @@ class MainActivity : AppCompatActivity(),
     private fun init(){
 
         activenessRecyclerViewAdapter = ActivenessRecyclerViewAdapter(this, this)
-        recyclerView.adapter = activenessRecyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = activenessRecyclerViewAdapter
 
         myViewModel.launch {
             myViewModel.getAllActiveness()

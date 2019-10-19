@@ -4,6 +4,7 @@ import io.objectbox.Box
 import io.objectbox.rx.RxQuery
 import io.reactivex.Observable
 import main.com.calendarapp.data.ObjectBox
+import main.com.calendarapp.models.Exercise
 import main.com.calendarapp.models.WorkoutSet
 
 class WorkoutSetRepoImpl : WorkoutSetRepo{
@@ -23,4 +24,9 @@ class WorkoutSetRepoImpl : WorkoutSetRepo{
         exerciseBox.remove(x)
     }
 
+    override fun getAllWorkoutSetsByExercise(exercise: Exercise): Observable<List<WorkoutSet>> {
+        return RxQuery.observable(exerciseBox.query().filter {
+            exercise.workoutSets.map { each -> each.id }.contains(it.id)
+        }.build())
+    }
 }

@@ -13,7 +13,7 @@ abstract class AbstractViewModel : ViewModel(){
     }
 
     @CallSuper
-    override fun onCleared() {
+    public override fun onCleared() {
         super.onCleared()
         disposables.clear()
     }

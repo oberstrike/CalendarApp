@@ -2,14 +2,12 @@ package main.com.calendarapp.views.activeness
 
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
-import main.com.calendarapp.models.Activeness
-import main.com.calendarapp.models.ActivenessType
-import main.com.calendarapp.models.Exercise
-import main.com.calendarapp.models.ExerciseType
+import main.com.calendarapp.models.*
 import main.com.calendarapp.repositories.ActivenessRepo
 import main.com.calendarapp.repositories.ExerciseRepo
 import main.com.calendarapp.repositories.WorkoutSetRepo
 import main.com.calendarapp.util.ActivenessContext
+import main.com.calendarapp.util.ExerciseContext
 import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
@@ -34,11 +32,12 @@ class ActivenessViewModel(
         return MainContext.activeActivenessObservable
     }
 
-    fun setActiveExercise(id: Long) {
-        ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(id)
+    fun setActiveExercise(exercise: Exercise) {
+        ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
+        ExerciseContext.workoutSets = workoutSetRepo.getAllWorkoutSetsByExercise(exercise)
     }
 
-    fun addNewExercise() {
+    fun addNewExercise(count: Int) {
         val exercise = Exercise(0, "Übung")
 
         val activenessType = getActivActivenessType()
@@ -49,7 +48,15 @@ class ActivenessViewModel(
             ActivenessType.ENDURANCE -> ExerciseType.ENDURANCEWORKOUTSET
         }
 
+        for (x in 1..count) {
+            val workoutSet = WorkoutSet(0, 0, 0)
+            workoutSetRepo.saveWorkoutSet(workoutSet)
+            exercise.workoutSets.add(workoutSet)
+        }
+
         exerciseRepo.saveExercise(exercise)
+
+        ExerciseContext.workoutSets = workoutSetRepo.getAllWorkoutSetsByExercise(exercise)
         ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
     }
 

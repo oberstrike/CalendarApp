@@ -3,6 +3,7 @@ package main.com.calendarapp.util
 import io.reactivex.Observable
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.Exercise
+import main.com.calendarapp.models.WorkoutSet
 
 object MainContext {
 
@@ -19,6 +20,10 @@ object ActivenessContext {
     lateinit var allExerciseObservable: Observable<List<Exercise>>
 
     lateinit var activeExerciseObservable: Observable<List<Exercise>>
+}
+
+object ExerciseContext {
+    lateinit var workoutSets: Observable<List<WorkoutSet>>
 
 }
 

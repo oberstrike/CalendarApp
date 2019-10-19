@@ -8,6 +8,5 @@ interface OnTextChangeListener {
 }
 
 interface Fillable {
-    var items: ArrayList<WorkoutSet>
-    fun notifyDataSetChanged(): Unit
+    fun setItems(list: ArrayList<WorkoutSet>)
 }

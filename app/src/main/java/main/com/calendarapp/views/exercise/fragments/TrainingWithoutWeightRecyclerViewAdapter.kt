@@ -20,7 +20,7 @@ class TrainingWithoutWeightRecyclerViewAdapter(
 ) : RecyclerView.Adapter<TrainingWithoutWeightRecyclerViewAdapter.ViewHolder>(),
     Fillable {
 
-    override var items = ArrayList<WorkoutSet>()
+    private var items = ArrayList<WorkoutSet>()
 
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -56,6 +56,16 @@ class TrainingWithoutWeightRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
+
+    override fun setItems(list: ArrayList<WorkoutSet>) {
+        if (list == null) {
+            return
+        }
+
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
+    }
 
 }
 

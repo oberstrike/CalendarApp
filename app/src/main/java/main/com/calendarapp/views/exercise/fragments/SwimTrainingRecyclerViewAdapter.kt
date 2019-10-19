@@ -20,14 +20,14 @@ class SwimTrainingRecyclerViewAdapter(
 ) : RecyclerView.Adapter<SwimTrainingRecyclerViewAdapter.ViewHolder>(),
     Fillable {
 
-    override var items = ArrayList<WorkoutSet>()
+    private var items = ArrayList<WorkoutSet>()
 
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val lanes: EditText = itemView.findViewById(R.id.firstAttributeEditText)
         val time: EditText = itemView.findViewById(R.id.secondAttributeEditText)
-        val lanesText: TextView = itemView.findViewById(R.id.firstAttributeTextView)
-        val timeText: TextView = itemView.findViewById(R.id.secondAttributeTextView)
+        //  val lanesText: TextView = itemView.findViewById(R.id.firstAttributeTextView)
+        //   val timeText: TextView = itemView.findViewById(R.id.secondAttributeTextView)
         val setTextView: TextView = itemView.findViewById(R.id.textViewSet)
     }
 
@@ -52,7 +52,7 @@ class SwimTrainingRecyclerViewAdapter(
                 this.onTextChangeListener.onChange(items[position])
             }
         }
-        holder.lanesText.text = context.resources.getText(R.string.lanes)
+        //     holder.lanesText.text = context.resources.getText(R.string.lanes)
 
         holder.time.hint = items[position].time.toString()
         holder.time.afterTextChanged {
@@ -66,7 +66,7 @@ class SwimTrainingRecyclerViewAdapter(
             }
         }
 
-        holder.timeText.text = context.resources.getText(R.string.time)
+        //  holder.timeText.text = context.resources.getText(R.string.time)
 
     }
 
@@ -75,6 +75,16 @@ class SwimTrainingRecyclerViewAdapter(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_workset_with_two_attributes, parent, false)
         return ViewHolder(view)
+    }
+
+    override fun setItems(list: ArrayList<WorkoutSet>) {
+        if (list == null) {
+            return
+        }
+
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
     }
 
 
