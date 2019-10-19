@@ -1,0 +1,132 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "2:5871696255578600770",
+      "lastPropertyId": "4:5370273024889917800",
+      "name": "Activeness",
+      "properties": [
+        {
+          "id": "1:2049542772763057108",
+          "name": "id"
+        },
+        {
+          "id": "2:4532999466206284260",
+          "name": "date"
+        },
+        {
+          "id": "3:7236047480263813476",
+          "name": "name"
+        },
+        {
+          "id": "4:5370273024889917800",
+          "name": "type"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:3929617655581352664",
+          "name": "exercises"
+        }
+      ]
+    },
+    {
+      "id": "3:183586991401303671",
+      "lastPropertyId": "5:2301376259658916128",
+      "name": "Exercise",
+      "properties": [
+        {
+          "id": "1:7149779544382364068",
+          "name": "id"
+        },
+        {
+          "id": "2:5954434712997851533",
+          "name": "name"
+        },
+        {
+          "id": "5:2301376259658916128",
+          "name": "type"
+        }
+      ],
+      "relations": [
+        {
+          "id": "3:4969018099577251644",
+          "name": "workoutSets"
+        }
+      ]
+    },
+    {
+      "id": "4:613859144115464644",
+      "lastPropertyId": "12:6193650025989967526",
+      "name": "WorkoutSet",
+      "properties": [
+        {
+          "id": "4:5213802723093831811",
+          "name": "repetitions"
+        },
+        {
+          "id": "5:6895467886415151509",
+          "name": "weight"
+        },
+        {
+          "id": "7:8456218261209871186",
+          "name": "id"
+        },
+        {
+          "id": "8:7756213729128113999",
+          "name": "distance"
+        },
+        {
+          "id": "10:1885761338623067156",
+          "name": "lanes"
+        },
+        {
+          "id": "12:6193650025989967526",
+          "name": "time"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "7:8315210869987393813",
+  "lastIndexId": "1:2799793424678353795",
+  "lastRelationId": "3:4969018099577251644",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [
+    5915568356612529723,
+    6907226652400682549,
+    7388694298073047351,
+    8315210869987393813
+  ],
+  "retiredIndexUids": [
+    2799793424678353795
+  ],
+  "retiredPropertyUids": [
+    8019164431579793197,
+    1407226426893665004,
+    856556312524410411,
+    7626883979335999913,
+    7138416277564940367,
+    2761597156524690755,
+    7595723701681584451,
+    1550734263720303490,
+    2912397165069088384,
+    4675784652047926632,
+    6391958847883890847,
+    3904856854789691654,
+    3953364990946426600,
+    5376586934872356348,
+    1731976157221262491,
+    8075178036291960811,
+    1359551696673124983,
+    7747998985526251889
+  ],
+  "retiredRelationUids": [
+    5946321337403742323
+  ],
+  "version": 1
+}
