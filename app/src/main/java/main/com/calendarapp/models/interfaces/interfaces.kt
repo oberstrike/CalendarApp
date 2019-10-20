@@ -1,20 +1,20 @@
 package main.com.calendarapp.models.interfaces
 
-interface StrengthWorkoutSet{
+interface IStrengthWorkoutSet {
     var repetitions: Long
     var weight: Long
 }
 
-interface EnduranceWorkoutSet{
+interface IEnduranceWorkoutSet {
     var distance: Long
     var time: Float
 }
 
-interface SwimWorkoutSet{
+interface ISwimWorkoutSet {
     var time: Float
     var lanes: Long
 }
 
-interface TrainWithoutWeightWorkoutSet {
+interface ITrainWithoutWeightWorkoutSet {
     var repetitions: Long
 }

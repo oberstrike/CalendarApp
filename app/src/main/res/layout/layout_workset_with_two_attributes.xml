@@ -23,35 +23,34 @@
             android:id="@+id/firstAttributeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="40dp"
             android:background="@color/colorDarkSecondary"
             android:text="@string/repetitions"
             android:textColor="@color/colorWhite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/firstAttributeEditText"
+            app:layout_constraintStart_toStartOf="@id/firstAttributeEditText"
+            app:layout_constraintTop_toTopOf="@id/firstAttributeEditText" />
 
         <TextView
             android:id="@+id/secondAttributeTextView"
-            android:layout_width="51dp"
+            android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_marginStart="225dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
             android:background="@color/colorDarkSecondary"
             android:text="@string/weight"
             android:textColor="@color/colorWhite"
-            app:layout_constraintEnd_toEndOf="@id/firstAttributeTextView"
-            app:layout_constraintStart_toStartOf="@id/firstAttributeTextView"
-            app:layout_constraintTop_toTopOf="@id/firstAttributeTextView" />
+            app:layout_constraintEnd_toEndOf="@id/secondAttributeEditText"
+            app:layout_constraintStart_toStartOf="@id/secondAttributeEditText"
+            app:layout_constraintTop_toTopOf="@id/secondAttributeEditText" />
 
 
         <TextView
             android:id="@+id/textViewSet"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
             android:text="@string/leer"
             android:textColor="@color/colorWhite"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,9 +59,8 @@
         <EditText
             android:id="@+id/firstAttributeEditText"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
             android:autofillHints="2"
             android:ems="10"
             android:hint="@string/leer"
@@ -75,9 +73,8 @@
         <EditText
             android:id="@+id/secondAttributeEditText"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
             android:autofillHints="2"
             android:ems="10"
             android:hint="@string/leer"

@@ -3,10 +3,10 @@ package main.com.calendarapp.models
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.annotation.Uid
-import main.com.calendarapp.models.interfaces.EnduranceWorkoutSet
-import main.com.calendarapp.models.interfaces.StrengthWorkoutSet
-import main.com.calendarapp.models.interfaces.SwimWorkoutSet
-import main.com.calendarapp.models.interfaces.TrainWithoutWeightWorkoutSet
+import main.com.calendarapp.models.interfaces.IEnduranceWorkoutSet
+import main.com.calendarapp.models.interfaces.IStrengthWorkoutSet
+import main.com.calendarapp.models.interfaces.ISwimWorkoutSet
+import main.com.calendarapp.models.interfaces.ITrainWithoutWeightWorkoutSet
 
 
 @Entity
@@ -15,8 +15,9 @@ data class WorkoutSet(
     override var repetitions: Long,
     override var weight: Long,
     override var distance: Long = 0,
-    override var time: Float = 0f,
+    @Uid(4970102307707177260L)
+    override var time: Float = 0.0f,
     override var lanes: Long = 0
-) : StrengthWorkoutSet, EnduranceWorkoutSet, SwimWorkoutSet, TrainWithoutWeightWorkoutSet
+) : IStrengthWorkoutSet, IEnduranceWorkoutSet, ISwimWorkoutSet, ITrainWithoutWeightWorkoutSet
 
 

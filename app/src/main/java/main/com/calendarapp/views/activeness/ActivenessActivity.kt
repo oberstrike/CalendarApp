@@ -31,7 +31,6 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         setContentView(R.layout.activity_activeness)
         setSupportActionBar(toolbar)
 
-
         val id = intent.getLongExtra("Id", 0)
         myViewModel.init(id)
 
@@ -53,7 +52,6 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
 
                 }
         }
-
 
         initRecyclerView()
         btn_add.setOnClickListener(this)
@@ -124,14 +122,14 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
     }
 
 
-    fun onActionDeleteExercise() {
+    private fun onActionDeleteExercise() {
         val position = exerciseRecyclerViewAdapter.position
         if (myViewModel.deleteExercise(exerciseRecyclerViewAdapter.getItem(position))) {
             Toast.makeText(this, "Gelöscht", Toast.LENGTH_LONG)
         }
     }
 
-    fun onActionRenameExercise() {
+    private fun onActionRenameExercise() {
         val position = exerciseRecyclerViewAdapter.position
         val exercise = exerciseRecyclerViewAdapter.getItem(position)
         val renameFragment = RenameExerciseDialog(exercise)

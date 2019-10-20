@@ -13,25 +13,30 @@
         android:text="@string/filter_dialog_title"
         android:textColor="@android:color/black" />
 
-    <RadioButton
-        android:id="@+id/radiobutton_name"
+    <RadioGroup
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="150dp"
-        android:text="@string/new_name" />
+        android:layout_height="wrap_content">
 
-    <RadioButton
-        android:id="@+id/radiobutton_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="150dp"
-        android:text="@string/date" />
+        <RadioButton
+            android:id="@+id/radiobutton_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="150dp"
+            android:text="@string/new_name" />
 
-    <RadioButton
-        android:id="@+id/radiobutton_weekday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="150dp"
-        android:text="@string/weekday" />
+        <RadioButton
+            android:id="@+id/radiobutton_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="150dp"
+            android:text="@string/date" />
+
+        <RadioButton
+            android:id="@+id/radiobutton_weekday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="150dp"
+            android:text="@string/weekday" />
+    </RadioGroup>
 
 </LinearLayout>

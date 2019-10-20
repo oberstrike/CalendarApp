@@ -65,7 +65,7 @@ class ExerciseRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_item, parent, false)
         return ViewHolder(view, onClickListener)
     }
 
