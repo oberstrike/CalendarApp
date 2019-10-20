@@ -19,6 +19,7 @@ import main.com.calendarapp.views.main.fragments.ActivenessRecyclerViewAdapter
 import main.com.calendarapp.views.main.fragments.AddNewActivityDialog
 import main.com.calendarapp.views.main.fragments.FilterSettingsDialog
 import main.com.calendarapp.views.main.fragments.RenameActivenessDialog
+import main.com.calendarapp.views.statistic.StatisticsActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -63,7 +64,11 @@ class MainActivity : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> true
-            R.id.action_statistics -> true
+            R.id.action_statistics -> {
+                val intent = Intent(this, StatisticsActivity::class.java)
+                startActivity(intent)
+                true
+            }
             R.id.action_filter -> {
                 val filterSettingsDialog = FilterSettingsDialog()
                 filterSettingsDialog.show(supportFragmentManager, "Change filter settings")

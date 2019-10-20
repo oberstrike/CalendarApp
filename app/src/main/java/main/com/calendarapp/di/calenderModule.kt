@@ -7,6 +7,7 @@ import main.com.calendarapp.util.rx.SchedulerProviderImpl
 import main.com.calendarapp.views.activeness.ActivenessViewModel
 import main.com.calendarapp.views.exercise.ExerciseViewModel
 import main.com.calendarapp.views.main.MainViewModel
+import main.com.calendarapp.views.statistic.StatisticsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -24,6 +25,8 @@ val fitnessModule = module {
     viewModel { ActivenessViewModel(get(), get(), get(), get()) }
 
     viewModel {ExerciseViewModel(get(), get(), get(), get())}
+
+    viewModel { StatisticsViewModel(get(), get()) }
 
     single { SchedulerProviderImpl() } bind SchedulerProvider::class
 

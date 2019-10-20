@@ -2,6 +2,7 @@ package main.com.calendarapp.repositories
 
 import io.objectbox.Box
 import io.objectbox.rx.RxQuery
+import io.reactivex.Observable
 import main.com.calendarapp.data.ObjectBox
 import main.com.calendarapp.ext.Weekday
 import main.com.calendarapp.models.Activeness
@@ -38,5 +39,10 @@ class ActivenessRepoImpl : ActivenessRepo {
 
     override fun delete(activeness: Activeness) {
         activenessBox.remove(activeness)
+    }
+
+
+    override fun getAllActivenessesByYear(year: Int): Observable<List<Activeness>> {
+        return RxQuery.observable(activenessBox.query().filter { it.date.year == year }.build())
     }
 }
