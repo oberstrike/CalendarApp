@@ -11,14 +11,12 @@
     <string name="title_activity_day">Aktivität</string>
     <string name="ok_button_name">Ok</string>
     <string name="leer">Platzhalter</string>
-    <string name="delete">Entfernen</string>
     <string name="repetitions">Wiederholungen</string>
     <string name="weight">Gewicht</string>
     <string name="time">Zeit</string>
     <string name="lanes">Bahnen</string>
     <string name="distance">Distanz</string>
     <string name="new_activeness_dialog_title">Auswahl der Sportart</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="new_exercise_dialog_title">Anzahl an Sätzen</string>
     <string name="new_name">Name</string>
@@ -30,9 +28,5 @@
         <item>Ausdauertraining</item>
         <item>Krafttraining</item>
         <item>Schwimmtraining</item>
-    </string-array>
-    <string-array name="exercise_type_strength_array">
-        <item>Übung mit Gewicht</item>
-        <item>Übung ohne Gewicht</item>
     </string-array>
 </resources>

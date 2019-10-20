@@ -26,7 +26,7 @@ val fitnessModule = module {
 
     viewModel {ExerciseViewModel(get(), get(), get(), get())}
 
-    viewModel { StatisticsViewModel(get(), get()) }
+    viewModel { StatisticsViewModel(get(), get(), get()) }
 
     single { SchedulerProviderImpl() } bind SchedulerProvider::class
 

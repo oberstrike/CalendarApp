@@ -16,7 +16,7 @@ import main.com.calendarapp.views.statistic.StatisticsViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
-class BarChartFragment : Fragment() {
+class ExerciseBarChartFragment : Fragment() {
 
 
     private val myViewModel: StatisticsViewModel by sharedViewModel()
@@ -33,45 +33,16 @@ class BarChartFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        barChart = view.findViewById(R.id.chart1)
-        barChart.description.isEnabled = false
-        barChart.setPinchZoom(false)
-        barChart.setDrawGridBackground(false)
-        barChart.setScaleEnabled(false)
-        barChart.description.text = "Meine Beschreibung"
-        barChart.animateXY(2000, 2000)
-        barChart.invalidate()
-
-
+        barChart = BarChartObject.createNewBarChart(view)
         val xAxis = barChart.xAxis
         xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return getXAxisValues()[value.toInt() - 1]
+                return BarChartObject.getXAxisValues()[value.toInt() - 1]
             }
         }
-
-
         initDataSet()
 
         super.onViewCreated(view, savedInstanceState)
-    }
-
-
-    private fun getXAxisValues(): MutableList<String> {
-        val xAxis = ArrayList<String>()
-        xAxis.add("JAN")
-        xAxis.add("FEB")
-        xAxis.add("MAR")
-        xAxis.add("APR")
-        xAxis.add("MAY")
-        xAxis.add("JUN")
-        xAxis.add("JUL")
-        xAxis.add("AUG")
-        xAxis.add("SEP")
-        xAxis.add("OCT")
-        xAxis.add("NOV")
-        xAxis.add("DEZ")
-        return xAxis
     }
 
 
@@ -84,7 +55,7 @@ class BarChartFragment : Fragment() {
                     val valueSet = ArrayList<BarEntry>()
                     for (key in grouped.keys) {
                         val month = key.get().toFloat()
-                        val sum = grouped[key]?.count()?.toFloat()
+                        val sum = grouped[key]?.map { it.exercises.count() }?.sum()?.toFloat()
                         if (sum != null)
                             valueSet.add(BarEntry(month, sum))
                         else
@@ -92,8 +63,8 @@ class BarChartFragment : Fragment() {
                     }
 
 
-                    val barDataSet = BarDataSet(valueSet, "Trainingseinheiten")
-                    barDataSet.color = Color.rgb(20, 155, 20)
+                    val barDataSet = BarDataSet(valueSet, "Übungen")
+                    barDataSet.color = Color.rgb(0, 0, 155)
                     barDataSet.valueTextSize = 12f
                     barChart.data = BarData(barDataSet)
 
