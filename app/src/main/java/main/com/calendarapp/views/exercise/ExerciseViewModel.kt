@@ -6,7 +6,6 @@ import main.com.calendarapp.repositories.ActivenessRepo
 import main.com.calendarapp.repositories.ExerciseRepo
 import main.com.calendarapp.repositories.WorkoutSetRepo
 import main.com.calendarapp.util.ActivenessContext
-import main.com.calendarapp.util.ExerciseContext
 import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
@@ -20,10 +19,7 @@ class ExerciseViewModel(
     var exerciseId: Long = 0
     var type: ExerciseType = ExerciseType.STRENGTHWORKOUTSET
 
-    fun getAllWorkoutSets() = ExerciseContext.workoutSets
-
     fun init() {
-
         launch {
             ActivenessContext.activeExerciseObservable.subscribe {
                 val exercise = it.first()
@@ -32,6 +28,13 @@ class ExerciseViewModel(
 
             }
         }
+    }
+
+    fun addWorkoutSet() {
+        val exercise = ActivenessContext.activeExercise
+        val workoutSet = WorkoutSet(0, 0, 0f)
+        saveWorkoutSet(workoutSet)
+        exercise.workoutSets.add(workoutSet)
     }
 
 
@@ -55,6 +58,11 @@ class ExerciseViewModel(
             activenessRepo.saveActiveness(activeness)
         }
 
+    }
+
+    fun setExerciseType(exerciseType: ExerciseType) {
+        ActivenessContext.activeExercise.type = exerciseType
+        exerciseRepo.saveExercise(ActivenessContext.activeExercise)
     }
 
 }

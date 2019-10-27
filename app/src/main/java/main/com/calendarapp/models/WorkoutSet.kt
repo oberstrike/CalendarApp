@@ -13,9 +13,9 @@ import main.com.calendarapp.models.interfaces.ITrainWithoutWeightWorkoutSet
 data class WorkoutSet(
     @Id var id: Long,
     override var repetitions: Long,
-    override var weight: Long,
+    @Uid(5314980679804279726L)
+    override var weight: Float,
     override var distance: Long = 0,
-    @Uid(4970102307707177260L)
     override var time: Float = 0.0f,
     override var lanes: Long = 0
 ) : IStrengthWorkoutSet, IEnduranceWorkoutSet, ISwimWorkoutSet, ITrainWithoutWeightWorkoutSet

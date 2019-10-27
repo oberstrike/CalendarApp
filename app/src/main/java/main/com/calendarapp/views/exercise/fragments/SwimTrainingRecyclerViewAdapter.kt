@@ -53,6 +53,17 @@ class SwimTrainingRecyclerViewAdapter(
         }
         holder.lanesText.text = context.resources.getText(R.string.lanes)
 
+        holder.lanes.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.lanes.setText(items[position].lanes.toString(), TextView.BufferType.EDITABLE)
+        }
+
+        holder.time.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.time.setText(items[position].time.toString(), TextView.BufferType.EDITABLE)
+        }
+
+
         holder.time.hint = items[position].time.toString()
         holder.time.afterTextChanged {
             if (it.isNotEmpty()) {

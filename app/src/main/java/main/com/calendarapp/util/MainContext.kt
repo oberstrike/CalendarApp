@@ -20,6 +20,8 @@ object ActivenessContext {
     lateinit var allExerciseObservable: Observable<List<Exercise>>
 
     lateinit var activeExerciseObservable: Observable<List<Exercise>>
+
+    lateinit var activeExercise: Exercise
 }
 
 object ExerciseContext {

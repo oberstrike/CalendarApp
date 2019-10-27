@@ -2,7 +2,7 @@ package main.com.calendarapp.models.interfaces
 
 interface IStrengthWorkoutSet {
     var repetitions: Long
-    var weight: Long
+    var weight: Float
 }
 
 interface IEnduranceWorkoutSet {

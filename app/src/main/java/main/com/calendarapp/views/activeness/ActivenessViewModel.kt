@@ -33,6 +33,7 @@ class ActivenessViewModel(
     }
 
     fun setActiveExercise(exercise: Exercise) {
+        ActivenessContext.activeExercise = exercise
         ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
         ExerciseContext.workoutSets = workoutSetRepo.getAllWorkoutSetsByExercise(exercise)
     }
@@ -49,7 +50,7 @@ class ActivenessViewModel(
         }
 
         for (x in 1..count) {
-            val workoutSet = WorkoutSet(0, 0, 0)
+            val workoutSet = WorkoutSet(0, 0, 0f)
             workoutSetRepo.saveWorkoutSet(workoutSet)
             exercise.workoutSets.add(workoutSet)
         }
@@ -57,6 +58,7 @@ class ActivenessViewModel(
         exerciseRepo.saveExercise(exercise)
 
         ExerciseContext.workoutSets = workoutSetRepo.getAllWorkoutSetsByExercise(exercise)
+        ActivenessContext.activeExercise = exercise
         ActivenessContext.activeExerciseObservable = exerciseRepo.getExerciseById(exercise.id)
     }
 

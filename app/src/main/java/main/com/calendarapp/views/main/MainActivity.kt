@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity(),
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
+            override fun onQueryTextSubmit(newText: String): Boolean {
+                activenessRecyclerViewAdapter.filter.filter(newText)
                 return false
             }
 

@@ -47,6 +47,15 @@ class TrainingWithoutWeightRecyclerViewAdapter(
                 this.onTextChangeListener.onChange(items[position])
             }
         }
+
+        holder.repetitions.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.repetitions.setText(
+                    items[position].repetitions.toString(),
+                    TextView.BufferType.EDITABLE
+                )
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -135,7 +135,6 @@ class ActivenessRecyclerViewAdapter(
                         } else {
                             val formatter = DateTimeFormat.forPattern("dd.MM.yyyy")
                             val date = activeness.date.toString(formatter)
-                            Log.i("info", date)
                             if (date.contains(pattern)) {
                                 filteredList.add(activeness)
                             }

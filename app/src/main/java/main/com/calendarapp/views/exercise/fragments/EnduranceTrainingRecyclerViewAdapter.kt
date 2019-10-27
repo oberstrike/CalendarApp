@@ -54,6 +54,19 @@ class EnduranceTrainingRecyclerViewAdapter(
 
         holder.distanceText.text = context.resources.getText(R.string.distance)
 
+        holder.distance.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.distance.setText(
+                    items[position].distance.toString(),
+                    TextView.BufferType.EDITABLE
+                )
+        }
+
+        holder.time.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.time.setText(items[position].time.toString(), TextView.BufferType.EDITABLE)
+        }
+
         holder.time.hint = items[position].time.toString()
         holder.time.afterTextChanged {
             if (it.isNotEmpty()) {

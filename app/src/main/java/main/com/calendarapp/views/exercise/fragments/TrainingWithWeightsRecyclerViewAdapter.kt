@@ -21,14 +21,13 @@ class TrainingWithWeightsRecyclerViewAdapter(
     private val onTextChangeListener: OnTextChangeListener
 ) : RecyclerView.Adapter<TrainingWithWeightsRecyclerViewAdapter.ViewHolder>(),
     Fillable {
-    val items = ArrayList<WorkoutSet>()
+    private val items = ArrayList<WorkoutSet>()
 
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val repetitions: EditText = itemView.findViewById(R.id.firstAttributeEditText)
         val weight: EditText = itemView.findViewById(R.id.secondAttributeEditText)
         val setTextView: TextView = itemView.findViewById(R.id.textViewSet)
-
     }
 
     fun getItem(position: Int): WorkoutSet {
@@ -39,11 +38,9 @@ class TrainingWithWeightsRecyclerViewAdapter(
         return items.size
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setTextView.text = "${position + 1}."
 
-        holder.repetitions.hint = items[position].repetitions.toString()
         holder.repetitions.afterTextChanged {
             if (it.isNotEmpty()) {
                 items[position].repetitions = it.toLongOrDefault(items[position].repetitions)
@@ -51,13 +48,34 @@ class TrainingWithWeightsRecyclerViewAdapter(
             }
         }
 
-        holder.weight.hint = items[position].weight.toString()
+        holder.repetitions.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.repetitions.setText(
+                    items[position].repetitions.toString(),
+                    TextView.BufferType.EDITABLE
+                )
+        }
+
+        holder.weight.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                holder.weight.setText(
+                    items[position].weight.toString(),
+                    TextView.BufferType.EDITABLE
+                )
+        }
+
         holder.weight.afterTextChanged {
             if (it.isNotEmpty()) {
-                items[position].weight = it.toLongOrDefault(items[position].weight)
+                val value = it.toFloatOrNull()
+                items[position].weight = value ?: items[position].weight
                 this.onTextChangeListener.onChange(items[position])
             }
         }
+
+
+        holder.repetitions.hint = items[position].repetitions.toString()
+        holder.weight.hint = items[position].weight.toString()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -72,7 +90,6 @@ class TrainingWithWeightsRecyclerViewAdapter(
     override fun setItems(list: ArrayList<WorkoutSet>) {
         items.clear()
         items.addAll(list)
-        notifyDataSetChanged()
     }
 
 }

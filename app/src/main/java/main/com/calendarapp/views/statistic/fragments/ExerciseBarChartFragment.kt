@@ -20,9 +20,7 @@ class ExerciseBarChartFragment : Fragment() {
 
 
     private val myViewModel: StatisticsViewModel by sharedViewModel()
-
-
-    lateinit var barChart: BarChart
+    private lateinit var barChart: BarChart
 
     override fun onCreateView(
         inflater: LayoutInflater,
