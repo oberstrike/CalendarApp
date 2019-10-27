@@ -39,7 +39,7 @@ class ActivenessViewModel(
     }
 
     fun addNewExercise(count: Int) {
-        val exercise = Exercise(0, "Übung")
+        val exercise = MainContext.createExercise(ExerciseType.STRENGTHWORKOUTSET)
 
         val activenessType = getActivActivenessType()
 

@@ -6,11 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.pwittchen.swipe.library.rx2.Swipe
+import com.github.pwittchen.swipe.library.rx2.SwipeEvent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import main.com.calendarapp.R
@@ -30,6 +33,8 @@ class MainActivity : AppCompatActivity(),
 
     private lateinit var activenessRecyclerViewAdapter: ActivenessRecyclerViewAdapter
 
+    private val swipe = Swipe(40, 200)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,7 +42,6 @@ class MainActivity : AppCompatActivity(),
         init()
         initAddAndDeleteBtn()
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -93,9 +97,52 @@ class MainActivity : AppCompatActivity(),
                 .doOnError {
                     println(it)
                 }
+                .map {
+                    for (activeness in it) {
+                        if (activeness.name.isEmpty()) {
+                            myViewModel.deleteActiveness(activeness)
+
+                        }
+                    }
+                    it.filter { each -> each.name.isNotEmpty() }
+                }
                 .subscribe {
                     activenessRecyclerViewAdapter.setActivenesses(ArrayList(it.asReversed()))
                     activenessRecyclerViewAdapter.notifyDataSetChanged()
+                }
+        }
+
+        myViewModel.launch {
+            myViewModel.page.subscribeOn(myViewModel.provider.computation())
+                .observeOn(myViewModel.provider.ui()).subscribe {
+                    val page = it + 1
+                    val pages = myViewModel.pages.value
+                    if (pages != 1)
+                        pageTextView.text = "Seite $page von $pages"
+                    else
+                        pageTextView.text = ""
+                }
+
+        }
+
+        myViewModel.launch {
+            swipe.observe().subscribeOn(myViewModel.provider.computation())
+                .observeOn(myViewModel.provider.ui())
+                .subscribe {
+                    val activePage = myViewModel.page.value!!
+                    val pages = myViewModel.pages.value!!
+
+                    if (SwipeEvent.SWIPED_LEFT == it) {
+                        if (activePage > 0) {
+                            myViewModel.page.onNext(activePage - 1)
+
+                        }
+                    } else if (SwipeEvent.SWIPED_RIGHT == it) {
+                        if (activePage < pages - 1) {
+                            myViewModel.page.onNext(activePage + 1)
+                        }
+                    }
+
                 }
         }
     }
@@ -154,6 +201,11 @@ class MainActivity : AppCompatActivity(),
         if (myViewModel.deleteActiveness(activenessRecyclerViewAdapter.getItem(position))) {
             Toast.makeText(this, "Gelöscht", Toast.LENGTH_LONG)
         }
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        swipe.dispatchTouchEvent(event)
+        return super.dispatchTouchEvent(event)
     }
 
 }

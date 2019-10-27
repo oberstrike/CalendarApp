@@ -32,7 +32,7 @@ class ExerciseViewModel(
 
     fun addWorkoutSet() {
         val exercise = ActivenessContext.activeExercise
-        val workoutSet = WorkoutSet(0, 0, 0f)
+        val workoutSet = MainContext.createWorkoutSet()
         saveWorkoutSet(workoutSet)
         exercise.workoutSets.add(workoutSet)
     }

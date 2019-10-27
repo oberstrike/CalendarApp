@@ -9,13 +9,14 @@ import org.joda.time.format.DateTimeFormat
 
 
 @Entity
-data class Activeness constructor(@Id(assignable = false) var id: Long = 0,
-                                  @Convert(
+data class Activeness(
+    @Id(assignable = false) var id: Long = 0,
+    @Convert(
                                       converter = MyDateTimeConverter::class,
                                       dbType = String::class
                                   ) var date: DateTime,
-                                  var name: String = "",
-                                  @Convert(
+    var name: String = "",
+    @Convert(
                                       converter = MyActivenessTypeConverter::class,
                                       dbType = String::class
                                   )

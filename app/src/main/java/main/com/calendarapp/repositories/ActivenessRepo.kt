@@ -15,4 +15,6 @@ interface ActivenessRepo {
      fun delete(activeness: Activeness)
 
      fun getAllActivenessesByYear(year: Int): Observable<List<Activeness>>
+
+    fun getAllActivenessSize(): Int
 }

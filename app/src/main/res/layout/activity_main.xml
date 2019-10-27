@@ -7,21 +7,6 @@
     tools:context=".views.main.MainActivity"
     android:background="@color/colorDarkSecondaryLight">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="50dp"
-        android:src="@android:drawable/ic_menu_delete"
-        app:layout_constraintBottom_toTopOf="@+id/include"
-        app:layout_constraintEnd_toStartOf="@+id/include"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -54,11 +39,23 @@
         layout="@layout/content_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        tools:layout_editor_absoluteX="5dp" />
+        app:layout_constraintVertical_bias="0.225"
+        tools:layout_editor_absoluteX="-49dp" />
+
+    <TextView
+        android:id="@+id/pageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="564dp"
+        android:background="@color/colorDarkSecondaryLight"
+        android:text="Page"
+        android:textColor="@color/colorDarkSecondary"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"
@@ -69,6 +66,23 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toStartOf="@+id/include"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="50dp"
+        android:src="@android:drawable/ic_menu_delete"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toStartOf="@+id/include"
         app:layout_constraintHorizontal_bias="0.0"

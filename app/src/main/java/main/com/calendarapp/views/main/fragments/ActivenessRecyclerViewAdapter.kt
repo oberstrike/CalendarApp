@@ -26,7 +26,8 @@ class ActivenessRecyclerViewAdapter(
     private var activenessesFull: ArrayList<Activeness> = ArrayList()
 
     fun setActivenesses(activenesses: ArrayList<Activeness>) {
-        this.activenesses = activenesses
+        val page = MainContext.settings.page
+        this.activenesses = ArrayList(activenesses.drop(page * 10).take(10))
         this.activenessesFull = ArrayList(activenesses)
     }
 
@@ -79,8 +80,6 @@ class ActivenessRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val activeness = activenesses[position]
-        val date = activeness.date
-
         when(activeness.type){
             ActivenessType.STRENGTH -> holder.image.setImageResource(R.drawable.strength)
             ActivenessType.ENDURANCE -> holder.image.setImageResource(R.drawable.endurance)

@@ -1,6 +1,7 @@
 package main.com.calendarapp.views.main
 
 
+import io.reactivex.subjects.BehaviorSubject
 import main.com.calendarapp.ext.convertDateTimeToHeadline
 import main.com.calendarapp.models.Activeness
 import main.com.calendarapp.models.ActivenessType
@@ -10,7 +11,6 @@ import main.com.calendarapp.repositories.WorkoutSetRepo
 import main.com.calendarapp.util.MainContext
 import main.com.calendarapp.util.rx.SchedulerProvider
 import main.com.calendarapp.views.AbstractViewModel
-import org.joda.time.DateTime
 
 class MainViewModel(
     private val activenessRepo: ActivenessRepo,
@@ -19,12 +19,32 @@ class MainViewModel(
     val provider: SchedulerProvider
                    ) : AbstractViewModel(){
 
+
+    var page: BehaviorSubject<Int> = BehaviorSubject.create()
+    var pages: BehaviorSubject<Int> = BehaviorSubject.create()
+
     init {
         MainContext.allActivenessObservable = activenessRepo.getAllActivenesses()
+        page.onNext(0)
+        launch {
+            getAllActiveness().subscribe {
+                pages.onNext((it.size / 10 + 1))
+            }
+        }
+
+        launch {
+            page.subscribe {
+                val temp = MainContext.createActiveness()
+                MainContext.settings.page = it
+                activenessRepo.saveActiveness(temp)
+                activenessRepo.delete(temp)
+            }
+        }
     }
 
+
     fun addActiveness(activenessType: ActivenessType) {
-        val activeness = Activeness(0L, DateTime.now())
+        val activeness = MainContext.createActiveness()
         with(activeness) {
             name = convertDateTimeToHeadline(date)
             type = activenessType
