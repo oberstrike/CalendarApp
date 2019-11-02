@@ -20,13 +20,6 @@ class ActivenessViewModel(
 ) : AbstractViewModel() {
 
     var startJob: Disposable? = null
-    var activenessId: Long = 0
-
-    fun init(id: Long) {
-        activenessId = id
-        MainContext.activeActivenessObservable = activenessRepo.getActivenessById(id)
-
-    }
 
     fun getActiveActiveness(): Observable<List<Activeness>> {
         return MainContext.activeActivenessObservable

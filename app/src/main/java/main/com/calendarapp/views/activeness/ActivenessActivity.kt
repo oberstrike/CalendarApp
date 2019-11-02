@@ -31,9 +31,6 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         setContentView(R.layout.activity_activeness)
         setSupportActionBar(toolbar)
 
-        val id = intent.getLongExtra("Id", 0)
-        myViewModel.init(id)
-
 
         myViewModel.launch {
             MainContext.activeActivenessObservable.subscribeOn(
@@ -135,4 +132,11 @@ class ActivenessActivity : AppCompatActivity(), ExerciseRecyclerViewAdapter.OnCl
         val renameFragment = RenameExerciseDialog(exercise)
         renameFragment.show(supportFragmentManager, "Rename Fragment")
     }
+
+    override fun onDestroy() {
+        MainContext.activeActiveness = null
+        super.onDestroy()
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package main.com.calendarapp.views.statistic.fragments
 
+import android.graphics.Color
 import android.view.View
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.formatter.ValueFormatter
@@ -17,6 +18,7 @@ object BarChartObject {
         barChart.description.text = "Meine Beschreibung"
         barChart.animateXY(100, 100)
         barChart.invalidate()
+        barChart.legend.textColor = Color.rgb(255, 255, 255)
 
         barChart.axisLeft.granularity = 1f
         barChart.axisLeft.valueFormatter = object : ValueFormatter() {
@@ -24,7 +26,10 @@ object BarChartObject {
                 return floor(value).toInt().toString()
             }
         }
+        barChart.axisLeft.textColor = Color.rgb(255, 255, 255)
         barChart.axisRight.granularity = 1f
+        barChart.axisRight.textColor = Color.rgb(255, 255, 255)
+
         barChart.axisRight.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
                 return floor(value).toInt().toString()

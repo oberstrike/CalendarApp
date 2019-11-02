@@ -47,7 +47,7 @@ class ActivenessBarChartFragment : Fragment() {
             myViewModel.getAllActiveness().subscribeOn(myViewModel.schedulerProvider.computation())
                 .observeOn(myViewModel.schedulerProvider.ui())
                 .subscribe {
-                    val grouped = it.groupBy { it.date.monthOfYear() }
+                    val grouped = it.groupBy { each -> each.date.monthOfYear() }
                     val valueSet = ArrayList<BarEntry>()
                     for (key in grouped.keys) {
                         val month = key.get().toFloat()
@@ -60,6 +60,7 @@ class ActivenessBarChartFragment : Fragment() {
 
                     val barDataSet = BarDataSet(valueSet, "Trainingseinheiten")
                     barDataSet.color = Color.rgb(20, 155, 20)
+                    barDataSet.valueTextColor = Color.rgb(255, 255, 255)
                     barDataSet.valueTextSize = 12f
                     barChart.data = BarData(barDataSet)
 

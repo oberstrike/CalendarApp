@@ -44,7 +44,6 @@ class ActivenessRecyclerViewAdapter(
         val image: ImageView = itemView.findViewById(R.id.image_view)
         val imageName: TextView = itemView.findViewById(R.id.text_view)
 
-
         init {
             itemView.setOnClickListener(this)
             itemView.setOnCreateContextMenuListener(this)
@@ -63,10 +62,7 @@ class ActivenessRecyclerViewAdapter(
             menu?.add(Menu.NONE, R.id.action_delete, Menu.NONE, R.string.action_delete)
             menu?.add(Menu.NONE, R.id.action_rename, Menu.NONE, R.string.action_rename)
         }
-
-
     }
-
 
     fun getItem(position: Int): Activeness {
         return activenesses[position]

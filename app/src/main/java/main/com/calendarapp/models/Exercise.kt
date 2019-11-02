@@ -14,7 +14,6 @@ data class Exercise(@Id var id:Long = 0,
                     )
                     var type: ExerciseType = ExerciseType.STRENGTHWORKOUTSET
 ) {
-
         lateinit var workoutSets: MutableList<WorkoutSet>
 }
 

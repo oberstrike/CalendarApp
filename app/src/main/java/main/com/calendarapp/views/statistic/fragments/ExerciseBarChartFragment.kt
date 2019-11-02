@@ -49,11 +49,12 @@ class ExerciseBarChartFragment : Fragment() {
             myViewModel.getAllActiveness().subscribeOn(myViewModel.schedulerProvider.computation())
                 .observeOn(myViewModel.schedulerProvider.ui())
                 .subscribe {
-                    val grouped = it.groupBy { it.date.monthOfYear() }
+                    val grouped = it.groupBy { each -> each.date.monthOfYear() }
                     val valueSet = ArrayList<BarEntry>()
                     for (key in grouped.keys) {
                         val month = key.get().toFloat()
-                        val sum = grouped[key]?.map { it.exercises.count() }?.sum()?.toFloat()
+                        val sum =
+                            grouped[key]?.map { each -> each.exercises.count() }?.sum()?.toFloat()
                         if (sum != null)
                             valueSet.add(BarEntry(month, sum))
                         else
@@ -63,6 +64,7 @@ class ExerciseBarChartFragment : Fragment() {
 
                     val barDataSet = BarDataSet(valueSet, "Übungen")
                     barDataSet.color = Color.rgb(0, 0, 155)
+                    barDataSet.valueTextColor = Color.rgb(255, 255, 255)
                     barDataSet.valueTextSize = 12f
                     barChart.data = BarData(barDataSet)
 

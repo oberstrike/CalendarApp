@@ -83,5 +83,18 @@ class MainViewModel(
         return false
     }
 
+    fun isReadyToSwitch(activeness: Activeness): Boolean {
+        val isReady = MainContext.activeActiveness == null
+
+        if (isReady) {
+            MainContext.activeActiveness = activeness
+            MainContext.activeActivenessObservable = activenessRepo.getActivenessById(activeness.id)
+        }
+
+        return isReady
+    }
+
+    fun getFilterType() = MainContext.settings.filterType
+
 
 }

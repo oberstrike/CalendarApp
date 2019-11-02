@@ -13,6 +13,8 @@ object MainContext {
 
     lateinit var activeActivenessObservable: Observable<List<Activeness>>
 
+    var activeActiveness: Activeness? = null
+
     var settings: Settings = Settings(FilterType.NAME, 0)
 
     fun createActiveness() = Activeness(0, DateTime.now())

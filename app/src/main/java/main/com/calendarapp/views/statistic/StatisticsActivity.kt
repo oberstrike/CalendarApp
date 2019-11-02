@@ -42,11 +42,11 @@ class StatisticsActivity : AppCompatActivity() {
                             .commit()
                         status = ActiveFragment.EXERCISEBARCHART
                     } else if (it == SwipeEvent.SWIPED_LEFT && status == ActiveFragment.EXERCISEBARCHART) {
-                        val activenessBarChartFragment = ActivenessBarChartFragment()
+                        val barFragment = ActivenessBarChartFragment()
                         supportFragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                            .replace(R.id.barchart_container, activenessBarChartFragment)
+                            .replace(R.id.barchart_container, barFragment)
                             .commit()
                         status = ActiveFragment.ACTIVENESSBARCHART
                     }

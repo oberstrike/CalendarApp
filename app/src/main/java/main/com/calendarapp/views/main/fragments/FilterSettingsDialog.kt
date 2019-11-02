@@ -16,7 +16,12 @@ class FilterSettingsDialog : AppCompatDialogFragment(), View.OnClickListener {
 
     private val myViewModel: MainViewModel by sharedViewModel()
 
-    private var filterType = MainContext.settings.filterType
+    private var filterType = myViewModel.getFilterType()
+
+    private lateinit var radioButtonName: RadioButton
+    private lateinit var radioButtonDate: RadioButton
+    private lateinit var radioButtonWeekday: RadioButton
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity, R.style.AlertDialogCustom)
@@ -26,15 +31,14 @@ class FilterSettingsDialog : AppCompatDialogFragment(), View.OnClickListener {
         if (inflater != null) {
             val view = inflater.inflate(R.layout.fragment_filter_dialog, null)
 
-            val radioButtonName = view.findViewById<RadioButton>(R.id.radiobutton_name)
+            radioButtonName = view.findViewById(R.id.radiobutton_name)
             radioButtonName.setOnClickListener(this)
 
-            val radioButtonDate = view.findViewById<RadioButton>(R.id.radiobutton_date)
+            radioButtonDate = view.findViewById(R.id.radiobutton_date)
             radioButtonDate.setOnClickListener(this)
 
-            val radioButtonWeekday = view.findViewById<RadioButton>(R.id.radiobutton_weekday)
+            radioButtonWeekday = view.findViewById(R.id.radiobutton_weekday)
             radioButtonWeekday.setOnClickListener(this)
-
 
             with(builder) {
                 setView(view)

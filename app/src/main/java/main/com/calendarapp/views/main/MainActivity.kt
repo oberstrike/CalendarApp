@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
             R.id.action_statistics -> {
                 val intent = Intent(this, StatisticsActivity::class.java)
                 startActivity(intent)
@@ -90,6 +89,7 @@ class MainActivity : AppCompatActivity(),
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = activenessRecyclerViewAdapter
 
+        //RecyclerView
         myViewModel.launch {
             myViewModel.getAllActiveness()
                 .subscribeOn(myViewModel.provider.computation())
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity(),
                 }
         }
 
+        //Seitenausgabe
         myViewModel.launch {
             myViewModel.page.subscribeOn(myViewModel.provider.computation())
                 .observeOn(myViewModel.provider.ui()).subscribe {
@@ -122,7 +123,18 @@ class MainActivity : AppCompatActivity(),
                     else
                         pageTextView.text = ""
                 }
+        }
 
+        myViewModel.launch {
+            myViewModel.pages.subscribeOn(myViewModel.provider.computation())
+                .observeOn(myViewModel.provider.ui()).subscribe {
+                    val page = myViewModel.page.value?.toInt() ?: 0
+                    val pages = it
+                    if (pages != 1)
+                        pageTextView.text = "Seite ${page + 1} von $pages"
+                    else
+                        pageTextView.text = ""
+                }
         }
 
         myViewModel.launch {
@@ -166,8 +178,10 @@ class MainActivity : AppCompatActivity(),
         val intent = Intent(this, ActivenessActivity::class.java)
         val activeness = activenessRecyclerViewAdapter.getItem(position)
 
-        intent.putExtra("Id", activeness.id)
-        startActivity(intent)
+        if (myViewModel.isReadyToSwitch(activeness)) {
+            startActivity(intent)
+        }
+
     }
 
 
