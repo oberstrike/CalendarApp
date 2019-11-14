@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autofillHints="@string/leer"
-                android:hint="3"
+                android:hint="max. 7 Sätzen"
                 android:inputType="number" />
 
         </TableRow>
