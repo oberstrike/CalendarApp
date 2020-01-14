@@ -24,7 +24,8 @@ fun createOkHttpClient() : OkHttpClient {
 
 object ServiceGenerator {
 
-    private const val API_BASE_URL = "http://192.168.2.112:8080"
+    private const val API_BASE_URL = "http://192.168.116.128:8080"
+    //private const val API_BASE_URL = "/"
 
     private val httpClient = OkHttpClient.Builder()
 
